@@ -90,8 +90,8 @@ function Project(){
          .then((resp) => resp.json())
          .then((data) => {
             console.log(data)
-            
-            //setServices(data.services)
+            setMovimento(data)
+            setItens(data.Itens)
             
             setShowServiceForm(false)
 
@@ -103,28 +103,33 @@ function Project(){
 
     function removeService(id){
 
+        console.log("Deletando... produto Id: " + id)        
+
         const itensUpdated = Movimento.Itens.filter((Itens) => Itens.Id !== id)
-
         const MovimentoUpdated = Movimento
-
         MovimentoUpdated.Itens = itensUpdated
-        
-        //projectUpdated.cost = parseFloat(projectUpdated.cost) - parseFloat(cost)
 
-
-        fetch(`http://localhost:5028/api/movimento/${MovimentoUpdated.Id}`,{
-            method:'PUT',
+        fetch(`http://localhost:5028/api/movimentoitem/${id}`,{
+            method:'DELETE',
             headers:{'Content-Type': 'application/json',
-            },            
-            body: JSON.stringify(MovimentoUpdated)
+            },
         }).then(resp => resp.json())
         .then((data) => {
-            console.log(data)
+            if (data !== 'true'){
+                setMessage("Erro ao deletar o produto Id(movimentoitem.id): " + id)
+                setType('error')
+                return false                
+            }else{
+                console.log("Deletado produto Id: " + id)
+            }
             setMovimento(MovimentoUpdated)
             setItens(itensUpdated)
-            setMessage('Serviço removido com sucesso!')
+            setMessage('Produto removido com sucesso!')
+        }).catch(err => {
+            console.log(err)
+            setMessage("Erro ao deletar o produto Id " + id)
+            setType('error')            
         })
-        .catch(err => console.log(err))
     }
 
     function toggleProjectForm(){
