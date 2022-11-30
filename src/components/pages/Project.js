@@ -46,8 +46,8 @@ function Project(){
         setMessage('')
         const lastItem = movimento.Itens[movimento.Itens.length - 1]
        // lastService.id = uuidv4()
-        const lastQuantidade = parseFloat(lastItem.Quantidade)
-        const lastValor = parseFloat(lastItem.Valor)
+        const lastQuantidade = parseFloat(lastItem.Quantidade).toFixed(2)
+        const lastValor = parseFloat(lastItem.Valor).toFixed(2)
 
       
         if(lastQuantidade  === 0){
@@ -64,7 +64,7 @@ function Project(){
             return false
         }        
 
-        const valorTotal = lastQuantidade * lastValor
+        const valorTotal = parseFloat(lastQuantidade * lastValor).toFixed(2)
         // maximum value validation 
        /* if(newCost > parseFloat(movimento.budget)){
             setMessage('Orçamento ultrapassado, verifique o valor do serviço')

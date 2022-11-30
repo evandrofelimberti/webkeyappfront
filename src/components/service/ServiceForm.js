@@ -3,6 +3,7 @@ import {useEffect, useState} from 'react'
 import Input from '../form/Input'
 import SubmitButton from '../form/SubmitButton'
 import Select from '../form/Select'
+import InputNumeric from '../form/InputNumeric'
 
 function ServiceForm({handleSubmit, btnText, projectData}){
     const [Itens, SetItens] = useState([])
@@ -55,20 +56,18 @@ function ServiceForm({handleSubmit, btnText, projectData}){
               placeholder={"Insira a Descrição do Item"}
               handleOnChange={handleChange}
             />
-            <Input
-              type={"number"}
+            <InputNumeric
               text="Quantidade"
               name="Quantidade"
               placeholder={"Insira a Quantidade"}
               handleOnChange={handleChange}
-            />
-            <Input
-              type={"number"}
+            />              
+            <InputNumeric
               text="Valor"
               name="Valor"
               placeholder={"Insira o Valor"}
               handleOnChange={handleChange}
-            />               
+            />              
             <SubmitButton text={btnText}/>      
 
         </form>
