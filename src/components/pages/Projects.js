@@ -79,6 +79,7 @@ function Projects(){
                             numero={project.Numero}
                             observacao={project.Observacao}
                             itens={project.Itens}
+                            total={project.Total}
                             handleRemove={removeProject}
                             />
                     ))

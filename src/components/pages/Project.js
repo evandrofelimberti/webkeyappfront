@@ -113,17 +113,11 @@ function Project(){
             method:'DELETE',
             headers:{'Content-Type': 'application/json',
             },
+            body:JSON.stringify(MovimentoUpdated),            
         }).then(resp => resp.json())
         .then((data) => {
-            if (data !== 'true'){
-                setMessage("Erro ao deletar o produto Id(movimentoitem.id): " + id)
-                setType('error')
-                return false                
-            }else{
-                console.log("Deletado produto Id: " + id)
-            }
-            setMovimento(MovimentoUpdated)
-            setItens(itensUpdated)
+            setMovimento(data)
+            setItens(data.Itens)
             setMessage('Produto removido com sucesso!')
         }).catch(err => {
             console.log(err)
@@ -185,6 +179,7 @@ function Project(){
                                     <p><span>Descricao:</span> {Movimento.Observacao}</p>
                                     <p><span>Tipo Movimento:</span> {Movimento.TipoMovimento.Descricao}</p>
                                     <p><span>Numero:</span> {Movimento.Numero}</p>
+                                    <p><span>Total: R$ </span> {Movimento.Total}</p>
                                 </div>    
                             ): (
                                 <div className={styles.project_info}>

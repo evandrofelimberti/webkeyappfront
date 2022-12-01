@@ -8,7 +8,7 @@ import { format } from 'date-fns'
 
 import moment from 'moment';
 
-function ProjectCard({key, id, datainclusao, numero, observacao, itens, handleRemove}){
+function ProjectCard({key, id, datainclusao, numero, observacao, itens, handleRemove, total}){
     const formatdate = new Date(datainclusao).toLocaleString("pt-BR", {
         year: "numeric",
         month: "long",
@@ -25,6 +25,7 @@ function ProjectCard({key, id, datainclusao, numero, observacao, itens, handleRe
             <h4>{observacao}</h4>
              <p><span>Data: </span>{formatdate}</p>
             <p><span>Número: </span>{numero}</p>       
+            <p><span>Total: R$ </span>{total}</p>  
             <div className={styles.project_card_actions}>
                 <Link to={`/project/${id}`}> 
                     <BsPencil /> Editar
