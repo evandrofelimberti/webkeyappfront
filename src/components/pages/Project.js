@@ -9,6 +9,7 @@ import ProjectForm from '../project/ProjectForm'
 import ServiceForm from '../service/ServiceForm'
 import Message from '../layout/Message'
 import ServiceCad from '../service/ServiceCad'
+import { numberFormat } from '../form/numberFormat';
 
 
 function Project(){
@@ -178,8 +179,8 @@ function Project(){
                                 <div className={styles.project_info}>
                                     <p><span>Descricao:</span> {Movimento.Observacao}</p>
                                     <p><span>Tipo Movimento:</span> {Movimento.TipoMovimento.Descricao}</p>
-                                    <p><span>Numero:</span> {Movimento.Numero}</p>
-                                    <p><span>Total: R$ </span> {Movimento.Total}</p>
+                                    <p><span>Numero:</span> {Movimento.Numero}</p>                                    
+                                    <p><span>Total: </span> {numberFormat(Movimento.Total)} </p>                                    
                                 </div>    
                             ): (
                                 <div className={styles.project_info}>

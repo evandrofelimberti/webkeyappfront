@@ -37,7 +37,8 @@ function ServiceForm({handleSubmit, btnText, projectData}){
             Produto:{
               Id: e.target.value,
               Descricao: e.target.options[e.target.selectedIndex].text,
-            }})
+            }
+          })
   }
 
     return(

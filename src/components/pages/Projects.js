@@ -9,7 +9,7 @@ import ProjectCard from '../project/ProjectCard'
 import { useState, useEffect} from 'react'
 
 function Projects(){
-    const [projects, setProjects] = useState([]);
+    const [movimento, setMovimentos] = useState([]);
     const [removeLoading, setRemoveLoading] = useState(false);
     const [projectMessage, setProjectMessage] = useState('')
 
@@ -19,7 +19,9 @@ function Projects(){
         message = location.state.message
     }
 
-   useEffect(() => {
+
+
+    useEffect(() => {
         setTimeout(
            async () => {
              await fetch("http://localhost:5028/api/movimento",{
@@ -34,13 +36,15 @@ function Projects(){
                  .then((resp) => resp.json())
                  .then((data) => {                    
                     console.log(data)
-                    setProjects(data)
+                    setMovimentos(data)
                     setRemoveLoading(true)
                 })
                  .catch((err) => console.log(err)) 
             }, 1000)
 
-    }, [])    
+    }, []) 
+   
+   
 
     function removeProject(id){
         fetch(`http://localhost:5028/api/movimento/${id}`,{
@@ -48,9 +52,10 @@ function Projects(){
             headers:{'Content-Type': 'application/json',
             },            
         }).then(resp => resp.json())
-        .then(() => {
-            setProjects(projects.filter((Movimento) => Movimento.Id !== id))
-            setProjectMessage('Projeto removido com sucesso!')
+        .then((data) => {
+            if (data = 'Movimento deletado!'){
+            setMovimentos(movimento.filter((Movimento) => Movimento.Id !== id))
+            setProjectMessage('Projeto removido com sucesso!')}
         })
         .catch(err => console.log(err))
     }
@@ -65,8 +70,8 @@ function Projects(){
             {projectMessage && <Message type="success" msg={projectMessage} />}
             <Container customClass="start">
                 
-                {projects.length > 0 && 
-                    projects.map((project) => (
+                {movimento.length > 0 && 
+                    movimento.map((project) => (
                         <ProjectCard 
                            /* name={project.name}
                             id={project.id}  
@@ -86,7 +91,7 @@ function Projects(){
 
                 }
                 {!removeLoading && <Loading />}
-                {removeLoading && projects.length === 0 &&(
+                {removeLoading && movimento.length === 0 &&(
                     <p>Não há projetos cadastrados!</p>
                 )}
 

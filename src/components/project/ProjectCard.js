@@ -4,9 +4,7 @@ import { Link } from 'react-router-dom'
 
 import {BsPencil, BsFillTrashFill} from 'react-icons/bs'
 
-import { format } from 'date-fns'
-
-import moment from 'moment';
+import { numberFormat } from '../form/numberFormat';
 
 function ProjectCard({key, id, datainclusao, numero, observacao, itens, handleRemove, total}){
     const formatdate = new Date(datainclusao).toLocaleString("pt-BR", {
@@ -25,7 +23,7 @@ function ProjectCard({key, id, datainclusao, numero, observacao, itens, handleRe
             <h4>{observacao}</h4>
              <p><span>Data: </span>{formatdate}</p>
             <p><span>Número: </span>{numero}</p>       
-            <p><span>Total: R$ </span>{total}</p>  
+            <p><span>Total: </span>{numberFormat(total)}</p>  
             <div className={styles.project_card_actions}>
                 <Link to={`/project/${id}`}> 
                     <BsPencil /> Editar

@@ -35,6 +35,7 @@ function ProjectForm({handleSubmit, btnText, projectData}){
     function handleCategory(e){
         setMovimento({
             ...Movimento,
+            TipoMovimentoId: e.target.value,
             TipoMovimento:{
                 Id: e.target.value,
                 Descricao: e.target.options[e.target.selectedIndex].text,
