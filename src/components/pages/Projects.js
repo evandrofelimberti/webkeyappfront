@@ -7,6 +7,7 @@ import Loading from '../layout/Loading'
 import styles from './Projects.module.css'
 import ProjectCard from '../project/ProjectCard'
 import { useState, useEffect} from 'react'
+import userEvent from '@testing-library/user-event'
 
 function Projects(){
     const [movimento, setMovimentos] = useState([]);
@@ -18,8 +19,6 @@ function Projects(){
     if(location.state){
         message = location.state.message
     }
-
-
 
     useEffect(() => {
         setTimeout(
@@ -51,11 +50,14 @@ function Projects(){
             method:'DELETE',
             headers:{'Content-Type': 'application/json',
             },            
-        }).then(resp => resp.json())
-        .then((data) => {
-            if (data = 'Movimento deletado!'){
-            setMovimentos(movimento.filter((Movimento) => Movimento.Id !== id))
-            setProjectMessage('Projeto removido com sucesso!')}
+        }).then(resp => {
+            resp.json(); 
+            if(resp.ok){
+                setMovimentos(movimento.filter((Movimento) => Movimento.Id !== id))
+                setProjectMessage('Movimento removido com sucesso!')                                
+            }else{
+                setProjectMessage('Ocorreu erro ao deletar o movimento!') 
+            }        
         })
         .catch(err => console.log(err))
     }

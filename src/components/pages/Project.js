@@ -40,7 +40,8 @@ function Project(){
                  .catch((err) => console.log(err)) 
             }, 1000)
 
-    }, [id])
+    }, [id]) 
+    
 
     function createService(movimento){
         // ultimo servico
@@ -49,8 +50,7 @@ function Project(){
        // lastService.id = uuidv4()
         const lastQuantidade = parseFloat(lastItem.Quantidade).toFixed(2)
         const lastValor = parseFloat(lastItem.Valor).toFixed(2)
-
-      
+     
         if(lastQuantidade  === 0){
             setMessage('Quantidade invalida!, verifique !')
             setType('error')
