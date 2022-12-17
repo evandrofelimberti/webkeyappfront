@@ -179,6 +179,9 @@ function Project(){
                                 <div className={styles.project_info}>
                                     <p><span>Descricao:</span> {Movimento.Observacao}</p>
                                     <p><span>Tipo Movimento:</span> {Movimento.TipoMovimento.Descricao}</p>
+                                    <p><span>Lavoura:</span> {Movimento.MovimentoLavoura.Lavoura.Descricao} 
+                                      - Área(ha): {Movimento.MovimentoLavoura.Lavoura.AreaHa}
+                                    </p>
                                     <p><span>Numero:</span> {Movimento.Numero}</p>                                    
                                     <p><span>Total: </span> {numberFormat(Movimento.Total)} </p>                                    
                                 </div>    
