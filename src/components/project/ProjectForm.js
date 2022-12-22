@@ -9,8 +9,14 @@ function ProjectForm({handleSubmit, btnText, projectData}){
 
     const [TipoMovimento, setTipoMovimento] = useState([])
     const [Lavoura, setLavoura] = useState([])
-    const [MovimentoLavoura, setMovimentoLavoura] = useState(projectData.MovimentoLavoura || {})
+    const [MovimentoLavoura, setMovimentoLavoura] = useState(projectData || {})
     const [Movimento, setMovimento] = useState(projectData || {})
+     
+    useEffect(()=>{
+        if(projectData){
+        if(projectData.MovimentoLavoura){
+        setMovimentoLavoura(projectData.MovimentoLavoura);
+    }}},[])
 
     useEffect(()=>{
         fetch("http://localhost:5028/api/TipoMovimento",{
