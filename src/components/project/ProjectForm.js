@@ -9,7 +9,7 @@ function ProjectForm({handleSubmit, btnText, projectData}){
 
     const [TipoMovimento, setTipoMovimento] = useState([])
     const [Lavoura, setLavoura] = useState([])
-    const [MovimentoLavoura, setMovimentoLavoura] = useState(projectData || {})
+    const [MovimentoLavoura, setMovimentoLavoura] = useState({})
     const [Movimento, setMovimento] = useState(projectData || {})
      
     useEffect(()=>{
@@ -121,14 +121,15 @@ function ProjectForm({handleSubmit, btnText, projectData}){
             handleOnChange={handleCamposMovimentoLavoura}
             value={MovimentoLavoura.Observacao ? MovimentoLavoura.Observacao: ''}
         />        
-       { /*<Input 
-            type="date" 
+        <Input 
+            type="datetime-local" 
             text="Data"
             name="DataRealizado"            
             placeholder="Informe uma Data"
-            handleOnChange={handleChange}
-            value={DataRealizado}
-    />  */        }
+            format="dd-mm-yyyy"
+            handleOnChange={handleCamposMovimentoLavoura}
+            value={MovimentoLavoura.DataRealizado ? MovimentoLavoura.DataRealizado: ''}
+        />          
            
         <SubmitButton text={btnText}/>
          

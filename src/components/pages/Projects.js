@@ -82,7 +82,7 @@ function Projects(){
                             key={project.id}*/
                             key={project.Id}
                             id={project.Id}
-                            datainclusao={project.DataInclusao}
+                            datainclusao={project.MovimentoLavoura.DataRealizado}
                             numero={project.Numero}
                             observacao={project.Observacao}
                             itens={project.Itens}
