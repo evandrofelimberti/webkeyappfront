@@ -85,7 +85,18 @@ function ProjectForm({handleSubmit, btnText, projectData}){
                     Descricao: e.target.options[e.target.selectedIndex].text,                               
             },
         })
-    }         
+    }
+    
+    function handleMovimentoLavouraSafra(e){
+        setMovimentoLavoura({
+            ...MovimentoLavoura, 
+                SafraId: e.target.value,
+                Safra:{
+                    Id: e.target.value,
+                    Descricao: e.target.options[e.target.selectedIndex].text,                               
+            },
+        })
+    }      
 
     function handleCamposMovimentoLavoura(e){
         setMovimentoLavoura({
@@ -125,13 +136,13 @@ function ProjectForm({handleSubmit, btnText, projectData}){
             handleOnChange={handleMovimentoLavoura}
             value={MovimentoLavoura ? MovimentoLavoura.LavouraId : ''}
         />        
-       {/* <Select 
+        <Select 
             name="SafraId" 
             text="Selecione a Safra" 
             options={Safra} 
-            handleOnChange={handleMovimentoLavoura}
+            handleOnChange={handleMovimentoLavouraSafra}
             value={MovimentoLavoura ? MovimentoLavoura.SafraId : ''}
-    />   */}      
+    />        
         <Input 
             type="text" 
             text="Observações"
