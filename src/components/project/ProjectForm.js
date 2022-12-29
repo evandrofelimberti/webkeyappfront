@@ -9,6 +9,7 @@ function ProjectForm({handleSubmit, btnText, projectData}){
 
     const [TipoMovimento, setTipoMovimento] = useState([])
     const [Lavoura, setLavoura] = useState([])
+    const [Safra, setSafra] = useState([])
     const [MovimentoLavoura, setMovimentoLavoura] = useState({})
     const [Movimento, setMovimento] = useState(projectData || {})
      
@@ -39,6 +40,17 @@ function ProjectForm({handleSubmit, btnText, projectData}){
          .then((data) => {setLavoura(data); console.log(data); })
          .catch((err) => console.log(err))        
     }, [])    
+
+    useEffect(()=>{
+        fetch("http://localhost:5028/api/Safra",{
+            method:"GET" ,
+            headers:{'Content-Type': 'application/json',
+          },
+         })
+         .then((resp) => resp.json())
+         .then((data) => {setSafra(data); console.log(data); })
+         .catch((err) => console.log(err))        
+    }, [])      
 
     const submit = (e) => {
         e.preventDefault()
@@ -73,7 +85,7 @@ function ProjectForm({handleSubmit, btnText, projectData}){
                     Descricao: e.target.options[e.target.selectedIndex].text,                               
             },
         })
-    }    
+    }         
 
     function handleCamposMovimentoLavoura(e){
         setMovimentoLavoura({
@@ -113,22 +125,29 @@ function ProjectForm({handleSubmit, btnText, projectData}){
             handleOnChange={handleMovimentoLavoura}
             value={MovimentoLavoura ? MovimentoLavoura.LavouraId : ''}
         />        
+       {/* <Select 
+            name="SafraId" 
+            text="Selecione a Safra" 
+            options={Safra} 
+            handleOnChange={handleMovimentoLavoura}
+            value={MovimentoLavoura ? MovimentoLavoura.SafraId : ''}
+    />   */}      
         <Input 
             type="text" 
             text="Observações"
             name="Observacao"
             placeholder="Insira observações adicionais da lavoura"
             handleOnChange={handleCamposMovimentoLavoura}
-            value={MovimentoLavoura.Observacao ? MovimentoLavoura.Observacao: ''}
+            value={MovimentoLavoura.Observacao ? MovimentoLavoura.Observacao : ''}
         />        
         <Input 
             type="datetime-local" 
             text="Data"
             name="DataRealizado"            
             placeholder="Informe uma Data"
-            format="dd-mm-yyyy"
+            format="yyyy-mm-dd"
             handleOnChange={handleCamposMovimentoLavoura}
-            value={MovimentoLavoura.DataRealizado ? MovimentoLavoura.DataRealizado: ''}
+            value={MovimentoLavoura.DataRealizado ? MovimentoLavoura.DataRealizado : ''}
         />          
            
         <SubmitButton text={btnText}/>

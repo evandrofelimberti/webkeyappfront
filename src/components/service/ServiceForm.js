@@ -33,6 +33,7 @@ function ServiceForm({handleSubmit, btnText, projectData}){
   
   function handleProduto(e){
     SetItens({...Itens,
+            Descricao: e.target.options[e.target.selectedIndex].text,
             ProdutoId: e.target.value,
             Produto:{
               Id: e.target.value,
@@ -56,6 +57,7 @@ function ServiceForm({handleSubmit, btnText, projectData}){
               name="Descricao"
               placeholder={"Insira a Descrição do Item"}
               handleOnChange={handleChange}
+              value={Itens.Descricao ? Itens.Descricao : ''}
             />
             <InputNumeric
               text="Quantidade"
