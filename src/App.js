@@ -12,7 +12,7 @@ import Project from './components/pages/Project'
 
 function App() {
   return (
-<Router>
+<Router className="text-3xl font-bold underline">
   <Navbar/>
   <Container customClass="min-height" >
   <Routes>

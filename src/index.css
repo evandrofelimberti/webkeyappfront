@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+{/*
 *{
   padding: 0;
   margin: 0;
@@ -10,4 +14,8 @@ body,
 #root{
   background-color: #efefef;
   height: 100%;
+}*/}
+
+body {
+  background-color: #efefef;
 }
