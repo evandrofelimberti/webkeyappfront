@@ -7,3 +7,28 @@
     justify-content: space-between;
     margin-bottom: 2em;
 }
+
+
+@media (max-width: 950px) {
+.project_container {
+    padding: 1em;
+}
+
+.title_container{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2em;
+}
+}
+
+@media (max-width: 450px) {
+.project_container {
+    padding: 1em;
+}
+
+.title_container{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2em;
+}
+}

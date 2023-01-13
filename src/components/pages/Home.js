@@ -4,7 +4,7 @@ import savings from '../../img/savings.svg'
 
 function Home(){
     return (
-            <section className={styles.home_container}>
+            <section className={styles.home_container} media="screen">
                 <h1>
                     Bem-vindo ao <span>Costs</span>
                 </h1>

@@ -1,3 +1,6 @@
+/* Use a media query to add a break point at 800px: */
+
+
 .home_container {
     width: 100%;
     display: flex;
@@ -26,4 +29,18 @@
 .home_container img{
     width: 350px;
     margin: 2em 0;
+}
+
+@media (max-width: 950px) {
+  .home_container {
+    width: 900px; /* The width is 100%, when the viewport is 800px or smaller */
+    display: flex;
+  }
+}
+    
+@media (max-width: 412px) {
+  .home_container {
+    width: 400px; /* The width is 100%, when the viewport is 800px or smaller */
+    display: flex;
+  }    
 }
