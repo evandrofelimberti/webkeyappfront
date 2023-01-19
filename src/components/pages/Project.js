@@ -196,7 +196,7 @@ function Project(){
                             )}
                     </div>
                     <div className={styles.service_form_container}>
-                        <h2>Adicione um serviço</h2>
+                        <h2 >Adicione um serviço.............</h2>
                         <button className={styles.btn} onClick={toggleServiceForm}>
                                 {!showServiceForm ? 'Adicionar serviço' : 'Fechar'}                            
                         </button>
