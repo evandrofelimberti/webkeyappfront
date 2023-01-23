@@ -171,9 +171,9 @@ function Project(){
                 <Container customClass="column">
                     {message && <Message type={type} msg={message} /> }
                     <div className={styles.details_container}>
-                        <h1> Movimentação: {Movimento.Observacao} </h1>
+                        <h1> {Movimento.Observacao} </h1>
                         <button className={styles.btn} onClick={toggleProjectForm}>
-                            {!showProjectForm ? 'Editar projeto' : 'Fechar'}                            
+                            {!showProjectForm ? 'Editar ' : 'Fechar'}                            
                             </button>
                             {!showProjectForm ? (
                                 <div className={styles.project_info}>
@@ -189,21 +189,21 @@ function Project(){
                                 <div className={styles.project_info}>
                                     <ProjectForm 
                                       handleSubmit={editPost} 
-                                      btnText="Concluir edição"
+                                      btnText="Gravar"
                                       projectData={Movimento}
                                     />
                                 </div>    
                             )}
                     </div>
                     <div className={styles.service_form_container}>
-                        <h2 >Adicione um serviço.............</h2>
+                        <h2 >Adicione um serviço</h2>
                         <button className={styles.btn} onClick={toggleServiceForm}>
-                                {!showServiceForm ? 'Adicionar serviço' : 'Fechar'}                            
+                                {!showServiceForm ? 'Adicionar' : 'Fechar'}                            
                         </button>
                         <div className={styles.project_info}>
                             {showServiceForm && (<ServiceForm 
                                                  handleSubmit={createService}
-                                                 btnText="Adicionar Serviço"
+                                                 btnText="Salvar "
                                                  projectData={Movimento}
                                                  />
                             )}

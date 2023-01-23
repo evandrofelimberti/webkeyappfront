@@ -3,7 +3,6 @@
 }
 
 .project_details h1,
-.project_details h2,
 .project_details p{
     margin-bottom: 0.5em;
 }
@@ -49,12 +48,12 @@
 
 @media (max-width: 450px) {
 .project_details{
-    padding: .5em;
+    padding: .1em;
 }
 .project_details h1,
 .project_details h2,
 .project_details p{
-    margin-bottom: 0.1em;
+    margin-bottom: .1em;
 }
 .details_container,
 .service_form_container{
@@ -64,6 +63,14 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+}
+.service_form_container h2{
+    margin-bottom: 0.3em;
+    padding-bottom: 0.3em;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 350px;
 }
 .btn {
     background-color: #222;
