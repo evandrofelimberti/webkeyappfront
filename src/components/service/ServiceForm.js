@@ -8,11 +8,12 @@ import InputNumeric from '../form/InputNumeric'
 function ServiceForm({handleSubmit, btnText, projectData}){
     const [Itens, SetItens] = useState([])
     const [Produto, setProduto]= useState([])
-
-    useEffect(()=>{
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZXZhbmRybyIsInJvbGUiOiJBZG1pbiIsIm5iZiI6MTY3NTYyMjAxOSwiZXhwIjoxNjc1NzA4NDE5LCJpYXQiOjE2NzU2MjIwMTl9.9iw2ZchGAUSBGnNkdEYcm6mvP_kL45FRgSET8CbUKDY";  
+      useEffect(()=>{
       fetch("http://localhost:5028/api/Produto",{
           method:"GET" ,
           headers:{'Content-Type': 'application/json',
+          "Authorization": `Bearer ${token}`,
         },
        })
        .then((resp) => resp.json())
