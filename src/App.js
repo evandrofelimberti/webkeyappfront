@@ -10,8 +10,17 @@ import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import Project from './components/pages/Project'
 import Login from './components/layout/Login'
+import { useState, useEffect} from 'react'
+import UseToken from './components/layout/UseToken'
 
 function App() {
+
+  const { token, setToken } = UseToken();
+
+  if(!token) {
+    return <Login setToken={setToken} />
+  }  
+
   return (
 <Router className="text-3xl font-bold underline">
   <Navbar/>
@@ -23,10 +32,10 @@ function App() {
     <Route  path="/contact" element={ <Contact />}> </Route>
     <Route  path="/newproject" element={ <NewProject />}> </Route>
     <Route  path="/project/:id" element={ <Project />}> </Route>
-    <Route  path="/login" element={ <Login />}> </Route>
-   </Routes>
+    {/*<Route  path="/login" element={ <Login />}> </Route>      */}
+   </Routes>  
    </Container>
-    <Footer/>
+    <Footer/> 
 </Router>
   );
 }

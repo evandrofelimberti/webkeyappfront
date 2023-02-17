@@ -4,25 +4,12 @@ import Input from '../form/Input'
 import SubmitButton from '../form/SubmitButton'
 import Select from '../form/Select'
 import InputNumeric from '../form/InputNumeric'
+import UseToken from '../layout/UseToken'
 
 function ServiceForm({handleSubmit, btnText, projectData}){
     const [Itens, SetItens] = useState([])
-    const [Produto, setProduto]= useState([])
-    const [token, setToken] = useState("")
-
-    fetch('https://localhost:7028/api/Usuario/auth', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ "nome": "evandro",
-                              "senha": "teste",
-                              "Tipo": 1 })})
-      .then(resp => resp.json())
-      .then(resp => {
-        setToken(resp.Token);
-      })    
-      
+    const [Produto, setProduto]= useState([])      
+    const { token, setToken } = UseToken();
 
       useEffect(()=>{
       fetch("http://localhost:5028/api/Produto",{
