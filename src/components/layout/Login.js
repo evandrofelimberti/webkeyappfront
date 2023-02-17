@@ -3,6 +3,7 @@ import Input from "../form/Input";
 import SubmitButton from "../form/SubmitButton";
 import styles from './Login.module.css'
 import React, { useState } from 'react';
+import savings from '../../img/savings.svg'
 
 
 async function loginUser(credentials) {
@@ -27,30 +28,30 @@ function Login({ setToken }){
           senha
         });
         setToken(token);
-      }    
-
+      }
+      
     return(
-<div >
-<form onSubmit={handleSubmit}>
-        <Input 
-            type="text" 
-            text="Usuario"
-            name="nome"
-            placeholder="Insira o usuário"
-            handleOnChange={e => setNome(e.target.value)}        
-        />        
-        <Input 
-            type="password"
-            text="Senha"
-            name="Senha"            
-            placeholder="Informe uma senha"
-            handleOnChange={e => setSenha(e.target.value)}
-        
-        />                     
-    <SubmitButton text={"Login"}/>      
-    </form>
-    </div> 
-
+        <div className={styles.login_container}>
+        <img src={savings} alt='Costs' />             
+        <form onSubmit={handleSubmit}>
+            <Input 
+                type="text" 
+                text="Usuario"
+                name="nome"
+                placeholder="Insira o usuário"
+                handleOnChange={e => setNome(e.target.value)}        
+            />        
+            <Input 
+                type="password"
+                text="Senha"
+                name="Senha"            
+                placeholder="Informe uma senha"
+                handleOnChange={e => setSenha(e.target.value)}
+            
+            />                     
+        <SubmitButton text={"Login"}/>      
+        </form>    
+        </div> 
   )   
 }
 

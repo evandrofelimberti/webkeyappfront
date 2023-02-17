@@ -1,22 +1,14 @@
-.newproject_container {
-    width: 100%;
-    margin: 0 auto;
-    padding: 0.1em;
-}
-
-.newproject_container h1{
-    margin-bottom: 0.5em;    
-}
-
-.newproject_container p{
-    color: #7b7b7b;
+.login_container {
+    width: 300px;
+    margin: 2em auto;
+    padding: .5em;
 }
 
 @media (max-width: 450px) {
-    .newproject_container {
-        width: 100%;
-        margin: 0 auto;
-        padding: 0.1em;
+    .login_container {
+        width: 200px;
+        margin: 1.5em auto;
+        padding: .5em;
         font-size: small;
     }
     }
