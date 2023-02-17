@@ -15,7 +15,7 @@ import UseToken from './components/layout/UseToken'
 
 function App() {
 
-  const { token, setToken } = useState();
+  const { token, setToken } = UseToken();
 
   if(!token) {
     return <Login setToken={setToken} />
