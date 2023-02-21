@@ -21,10 +21,17 @@ function App() {
     return <Login setToken={setToken} />
   }  
 
-  return (
+const handleLogout = async()=>{
+  localStorage.setItem('token', "")
+}
+
+  return (    
 <Router className="text-3xl font-bold underline">
   <Navbar/>
   <Container customClass="min-height" >
+  <div >
+    {token && <button text="Sair" onClick={handleLogout}>Sair</button>}
+    </div>        
   <Routes>
     <Route exact path="/" element={ <Home />}> </Route> {/*--exact somente para barra*/}
     <Route  path="/projects" element={ <Projects />}> </Route>    
@@ -32,7 +39,6 @@ function App() {
     <Route  path="/contact" element={ <Contact />}> </Route>
     <Route  path="/newproject" element={ <NewProject />}> </Route>
     <Route  path="/project/:id" element={ <Project />}> </Route>
-    {/*<Route  path="/login" element={ <Login />}> </Route>      */}
    </Routes>  
    </Container>
     <Footer/> 
