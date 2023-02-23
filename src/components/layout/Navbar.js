@@ -4,19 +4,23 @@ import styles from './Navbar.module.css'
 import logo from '../../img/costs_logo.png'
 import Container from './Container'
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
-
 import React, { useState } from 'react';
+import UseToken from './UseToken';
 
 function Navbar(){
 
   const [nav, setNav] = useState(false);
-
+  const { token, setToken } = UseToken();   
+  
   const handleNav = () => {
     setNav(!nav);
   };
 
+  const handleLogout = ()=>{
+    localStorage.setItem('token', null);
+  }  
     return(
-            
+           
     <div className='flex justify-between items-center h-24 max-w-[1240px] mx-auto px-4 text-white bg-black '>
         <h1 className='w-full text-3xl font-bold text-[#00df9a]'>
             <Link to="/"> <img src={logo} alt={"Costs"} /> </Link>
@@ -34,6 +38,12 @@ function Navbar(){
                         <li className='p-4'>
                         <Link to="/contact">Contact</Link>
                         </li>
+                        {token &&                        
+                          <li className='p-4'>           
+                          <Link onClick={handleLogout} to="/"> Logout</Link>
+                          </li>
+                        }                          
+                        
           </ul>
           <div onClick={handleNav} className='block md:hidden'>
               {nav ? <AiOutlineClose size={20}/> : <AiOutlineMenu size={20} />}
@@ -47,14 +57,11 @@ function Navbar(){
               <li className='p-4 border-b border-gray-600'><Link to="/company">Company</Link></li>
               <li className='p-4 border-b border-gray-600'><Link to="/contact">Contact</Link></li>
               <li className='p-4'><Link to="/contact">Contact</Link></li>
+              {token &&                        
+                <li className='p-4'><Link onClick={handleLogout} to="/"> Logout</Link></li>
+              }
           </ul>
-    </div>
-    
-        
- 
-        
-    
-        
+    </div>       
     )
 }
 

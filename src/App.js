@@ -14,24 +14,16 @@ import { useState, useEffect} from 'react'
 import UseToken from './components/layout/UseToken'
 
 function App() {
-
-  const { token, setToken } = UseToken();
+  const { token, setToken } = UseToken(); 
 
   if(!token) {
-    return <Login setToken={setToken} />
+    return <Login setToken={setToken} />    
   }  
-
-const handleLogout = async()=>{
-  localStorage.setItem('token', "")
-}
 
   return (    
 <Router className="text-3xl font-bold underline">
   <Navbar/>
-  <Container customClass="min-height" >
-  <div >
-    {token && <button text="Sair" onClick={handleLogout}>Sair</button>}
-    </div>        
+  <Container customClass="min-height" >       
   <Routes>
     <Route exact path="/" element={ <Home />}> </Route> {/*--exact somente para barra*/}
     <Route  path="/projects" element={ <Projects />}> </Route>    
