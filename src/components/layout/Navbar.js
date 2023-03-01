@@ -16,8 +16,9 @@ function Navbar(){
     setNav(!nav);
   };
 
-  const handleLogout = ()=>{
-    localStorage.setItem('token', null);
+  const handleLogout = ()=>{    
+    localStorage.clear();
+    window.location.href = '/';    
   }  
     return(
            
@@ -35,9 +36,6 @@ function Navbar(){
                         <li className='p-4'>                    
                         <Link to="/company">Company</Link>
                         </li>
-                        <li className='p-4'>
-                        <Link to="/contact">Contact</Link>
-                        </li>
                         {token &&                        
                           <li className='p-4'>           
                           <Link onClick={handleLogout} to="/"> Logout</Link>
@@ -52,11 +50,10 @@ function Navbar(){
             <h1 className='w-full text-3xl font-bold text-[#00df9a] m-4'>
                 <Link to="/"> <img src={logo} alt={"Costs"} /> </Link>
             </h1>
-              <li className='p-4 border-b border-gray-600'><Link to="/">Home</Link></li>
-              <li className='p-4 border-b border-gray-600'><Link to="/projects">Projects</Link></li>
-              <li className='p-4 border-b border-gray-600'><Link to="/company">Company</Link></li>
-              <li className='p-4 border-b border-gray-600'><Link to="/contact">Contact</Link></li>
-              <li className='p-4'><Link to="/contact">Contact</Link></li>
+              <li className='p-4 border-b border-gray-600'><Link to="/" onClick={<AiOutlineClose size={20}/>} >Home</Link></li>
+              <li className='p-4 border-b border-gray-600'><Link to="/projects" onClick={<AiOutlineClose size={20}/>} >Projects</Link></li>
+              <li className='p-4 border-b border-gray-600'><Link to="/company" onClick={<AiOutlineClose size={20}/>} >Company</Link></li>
+              <li className='p-4 border-b border-gray-600'><Link to="/contact" onClick={<AiOutlineClose size={20}/>} >Contact</Link></li>
               {token &&                        
                 <li className='p-4'><Link onClick={handleLogout} to="/"> Logout</Link></li>
               }
