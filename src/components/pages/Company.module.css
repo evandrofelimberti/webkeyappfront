@@ -1,0 +1,132 @@
+.company_details{
+    padding: 0.5em;
+}
+
+.company_details h1,
+.company_details p{
+    margin-bottom: 0.5em;
+}
+
+.company_details h1{
+    background-color: #222;
+    color: #ffbb33;
+    padding: 0.4em;
+    font-size: large;
+}
+
+.company_details span {
+    font-weight: bold;
+}
+
+.details_container,
+.itens_form_container{
+    border-bottom: 1px solid #7a7a7a;
+    margin-bottom: 1.2em;
+    padding-bottom: 1.2em;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.btn {
+    background-color: #222;
+    color: #fff;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    transition: 0.5s;
+    cursor: pointer;
+    max-height: 40px;
+    border: none;
+}
+
+.btn:hover {
+    color: #ffbb33;
+}
+
+.project_info{
+    width: 100%;
+} 
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 1rem;
+  }
+  
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  th,
+  td {
+    border: 1px solid #ffffff;
+    text-align: left;
+    padding: 8px;
+    font-size: large;
+    width: 100%;
+  }
+  
+  th {
+    background-color: #222;    
+    color: #ffbb33;    
+  }
+  
+  /*td {
+    background-color: white;    
+    color: black;    }
+  }*/
+  
+  form {
+    display: flex;
+    gap: 5px;
+  }
+  
+  form td:last-child {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  
+  form * {
+    font-size: medium;
+  }
+
+@media (max-width: 450px) {
+.company_details{
+    padding: .1em;
+    font-size: small;
+}
+.company_details h1,
+.company_details h2,
+.company_details p{
+    margin-bottom: .1em;
+}
+.details_container,
+.itens_form_container{
+    border-bottom: 1px solid #7a7a7a;
+    margin-bottom: 0.3em;
+    padding-bottom: .3em;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.itens_form_container h2{
+    margin-bottom: 0.3em;
+    padding-bottom: 0.3em;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 350px;
+}
+.btn {
+    background-color: #222;
+    color: #fff;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    transition: 0.5s;
+    cursor: pointer;
+    max-height: 90px;
+    border: none;
+}
+}
