@@ -78,10 +78,11 @@
     color: black;    }
   }*/
   
-  form {
+  
+ /*form {
     display: flex;
     gap: 5px;
-  }
+  }*/
   
   form td:last-child {
     display: flex;
@@ -95,7 +96,7 @@
 @media (max-width: 450px) {
 .company_details{
     padding: .1em;
-    font-size: small;
+    font-size: medium;
 }
 .company_details h1,
 .company_details h2,
