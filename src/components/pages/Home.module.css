@@ -38,7 +38,7 @@
   }
 }
     
-@media (max-width: 412px) {
+@media (max-width: 450px) {
   .home_container {
     width: 100%; /* The width is 100%, when the viewport is 800px or smaller */
     display: flex;

@@ -2,17 +2,20 @@ import { useState, useEffect} from 'react'
 import { numberFormat } from '../form/numberFormat';
 import Container from '../layout/Container'
 import styles from './Company.module.css'
+import Select from '../form/Select'
+import SubmitButton from '../form/SubmitButton'
 
 function Company(){
 
     const [movimento, setMovimentos] = useState([]);
     const [despesas, setDespesas] = useState([]);
     const [colheita, setColheita] = useState([]);
+    const [Lavoura, setLavoura] = useState([])
+    const [Safra, setSafra] = useState([])    
+    const [MovimentoLavoura, setMovimentoLavoura] = useState({})    
 
-    useEffect(() => {
-        setTimeout(
-           async () => {           
-             await fetch("http://localhost:5028/api/Movimento/LavouraSafra?idSafra=1&idLavoura=1",{
+    function pesquisarMovimento(){
+              fetch(`http://localhost:5028/api/Movimento/LavouraSafra?idSafra=${MovimentoLavoura.SafraId}&idLavoura=${MovimentoLavoura.LavouraId}`,{
                     method:"GET" ,     
                     mode:"cors",                                  
                     headers:{
@@ -29,12 +32,71 @@ function Company(){
                     setColheita(data.Colheita)
                 })
                  .catch((err) => console.log(err)) 
-            }, 1000)
+        }
 
-    }, []) 
+    useEffect(()=>{
+        fetch("http://localhost:5028/api/Lavoura",{
+            method:"GET" ,
+            headers:{'Content-Type': 'application/json',
+          },
+         })
+         .then((resp) => resp.json())
+         .then((data) => {setLavoura(data); console.log(data); })
+         .catch((err) => console.log(err))        
+    }, [])    
+
+    useEffect(()=>{
+        fetch("http://localhost:5028/api/Safra",{
+            method:"GET" ,
+            headers:{'Content-Type': 'application/json',
+          },
+         })
+         .then((resp) => resp.json())
+         .then((data) => {setSafra(data); console.log(data); })
+         .catch((err) => console.log(err))        
+    }, [])     
+
+    function handleMovimentoLavoura(e){
+        setMovimentoLavoura({
+            ...MovimentoLavoura, 
+                LavouraId: e.target.value,
+                Lavoura:{
+                    Id: e.target.value,
+                    Descricao: e.target.options[e.target.selectedIndex].text,                               
+            },
+        })
+    }
+    
+    function handleMovimentoLavouraSafra(e){
+        setMovimentoLavoura({
+            ...MovimentoLavoura, 
+                SafraId: e.target.value,
+                Safra:{
+                    Id: e.target.value,
+                    Descricao: e.target.options[e.target.selectedIndex].text,                               
+            },
+        })
+    }        
 
     return( 
         <div className={styles.company_details}>
+        <Select 
+            name="LavouraId" 
+            text="Selecione a Lavoura" 
+            options={Lavoura} 
+            handleOnChange={handleMovimentoLavoura}
+            value={MovimentoLavoura ? MovimentoLavoura.LavouraId : ''}
+        />        
+        <Select 
+            name="SafraId" 
+            text="Selecione a Safra" 
+            options={Safra} 
+            handleOnChange={handleMovimentoLavouraSafra}
+            value={MovimentoLavoura ? MovimentoLavoura.SafraId : ''}
+        />              
+
+        <button className={styles.btn} onClick={pesquisarMovimento}> {"Pesquisar"} </button>        
+
             <h1>Resultado Safra</h1>
             <p><span>Lucro</span>: {numberFormat(movimento.Lucro)} </p>            
             <p><span>Área ha</span>: {new Intl.NumberFormat('pt-BR', { currency: 'BRL' }).format( movimento.AreaHa)} </p>            

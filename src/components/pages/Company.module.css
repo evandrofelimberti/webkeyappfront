@@ -37,6 +37,7 @@
     cursor: pointer;
     max-height: 40px;
     border: none;
+    margin-bottom: 0.3em;    
 }
 
 .btn:hover {
@@ -72,17 +73,10 @@
     background-color: #222;    
     color: #ffbb33;    
   }
-  
-  /*td {
-    background-color: white;    
-    color: black;    }
-  }*/
-  
-  
- /*form {
-    display: flex;
-    gap: 5px;
-  }*/
+
+.btn:hover{
+    color: #ffbb33;
+}  
   
   form td:last-child {
     display: flex;
@@ -127,7 +121,10 @@
     text-decoration: none;
     transition: 0.5s;
     cursor: pointer;
-    max-height: 90px;
-    border: none;
+    max-height: 90px;  
+    margin-bottom: 0.3em;        
+}
+.btn:hover{
+  color: #ffbb33;
 }
 }
