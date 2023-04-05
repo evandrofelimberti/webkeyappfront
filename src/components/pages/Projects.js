@@ -65,8 +65,8 @@ function Projects(){
     return (
         <div className={styles.project_container}>
             <div className={styles.title_container}>
-                <h1>Meus projetos</h1>
-                <LinkButton to="/newproject" text="Criar Projeto"/>
+                <h1>Listagem de movimentações</h1>
+                <LinkButton to="/newproject" text="Criar movimento"/>
             </div> 
             {message && <Message type="success" msg={message} />}
             {projectMessage && <Message type="success" msg={projectMessage} />}
@@ -82,7 +82,7 @@ function Projects(){
                             key={project.id}*/
                             key={project.Id}
                             id={project.Id}
-                            datainclusao={project.MovimentoLavoura.DataRealizado}
+                            datainclusao={project.DataInclusao}
                             numero={project.Numero}
                             observacao={project.Observacao}
                             itens={project.Itens}

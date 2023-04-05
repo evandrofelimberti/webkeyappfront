@@ -63,7 +63,12 @@ function Project(){
             setType('error')
             movimento.Itens.pop()
             return false
-        }        
+        }       
+        
+        if(movimento.MovimentoLavoura == null)
+        {
+            movimento.MovimentoLavoura = {};
+        }
 
         const valorTotal = parseFloat(lastQuantidade * lastValor).toFixed(2)
         // maximum value validation 
@@ -108,7 +113,13 @@ function Project(){
 
         const itensUpdated = Movimento.Itens.filter((Itens) => Itens.Id !== id)
         const MovimentoUpdated = Movimento
+
         MovimentoUpdated.Itens = itensUpdated
+            
+        if(MovimentoUpdated.MovimentoLavoura == null)
+        {
+            MovimentoUpdated.MovimentoLavoura = {};
+        }
 
         fetch(`http://localhost:5028/api/movimentoitem/${id}`,{
             method:'DELETE',
@@ -179,9 +190,11 @@ function Project(){
                                 <div className={styles.project_info}>
                                     <p><span>Descricao:</span> {Movimento.Observacao}</p>
                                     <p><span>Tipo Movimento:</span> {Movimento.TipoMovimento.Descricao}</p>
+                                    {((Movimento.MovimentoLavoura !== null)&&(Movimento.hasOwnProperty("MovimentoLavoura.Lavoura"))) &&
                                     <p><span>Lavoura:</span> {Movimento.MovimentoLavoura.Lavoura.Descricao} 
                                       - Área(ha): {Movimento.MovimentoLavoura.Lavoura.AreaHa}
-                                    </p>
+                                    </p>}
+
                                     <p><span>Numero:</span> {Movimento.Numero}</p>                                    
                                     <p><span>Total: </span> {numberFormat(Movimento.Total)} </p>                                    
                                 </div>    
@@ -196,7 +209,7 @@ function Project(){
                             )}
                     </div>
                     <div className={styles.service_form_container}>
-                        <h2 >Adicione um serviço</h2>
+                        <h2 >Adicione um produto</h2>
                         <button className={styles.btn} onClick={toggleServiceForm}>
                                 {!showServiceForm ? 'Adicionar' : 'Fechar'}                            
                         </button>
@@ -209,7 +222,7 @@ function Project(){
                             )}
                         </div>
                     </div>
-                    <h2>Serviços </h2>
+                    <h2>Produtos </h2>
                     <Container customClass="start">
                         {Itens.length > 0 && 
                         Itens.map((Itens) => (
@@ -226,7 +239,7 @@ function Project(){
                         ))
 
                         }
-                        {Itens.length === 0 && <p> Não há serviços cadastrados.</p>}
+                        {Itens.length === 0 && <p> Não há produtos cadastrados.</p>}
 
                     </Container>
                 </Container>
