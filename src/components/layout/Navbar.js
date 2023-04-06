@@ -1,8 +1,6 @@
 
 import {Link} from 'react-router-dom'
-import styles from './Navbar.module.css'
 import logo from '../../img/costs_logo.png'
-import Container from './Container'
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import React, { useState } from 'react';
 import UseToken from './UseToken';
@@ -33,6 +31,9 @@ function Navbar(){
                         <li className='p-4'>
                         <Link to="/projects">Projects</Link>
                         </li>
+                        <li className='p-4'>
+                        <Link to="/products">Products</Link>
+                        </li>                        
                         <li className='p-4'>                    
                         <Link to="/company">Company</Link>
                         </li>
@@ -52,6 +53,7 @@ function Navbar(){
             </h1>
               <li className='p-4 border-b border-gray-600'><Link to="/" onClick={<AiOutlineClose size={20}/>} >Home</Link></li>
               <li className='p-4 border-b border-gray-600'><Link to="/projects" onClick={<AiOutlineClose size={20}/>} >Projects</Link></li>
+              <li className='p-4 border-b border-gray-600'><Link to="/products" onClick={<AiOutlineClose size={20}/>} >Products</Link></li>              
               <li className='p-4 border-b border-gray-600'><Link to="/company" onClick={<AiOutlineClose size={20}/>} >Company</Link></li>
               <li className='p-4 border-b border-gray-600'><Link to="/contact" onClick={<AiOutlineClose size={20}/>} >Contact</Link></li>
               {token &&                        

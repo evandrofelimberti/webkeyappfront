@@ -1,0 +1,36 @@
+.product_container {
+    width: 450px;
+    margin: 0 auto;
+    padding: 0.1em;
+}
+
+.product_container h1{
+    margin-bottom: 0.5em;    
+}
+
+.product_container p{
+    color: #7b7b7b;
+}
+
+.list .action {
+    cursor: pointer;
+  }
+  
+  .submit-form {
+    max-width: 300px;
+    margin: auto;
+  }
+  
+  .edit-form {
+    max-width: 300px;
+    margin: auto;
+  }
+
+@media (max-width: 450px) {
+    .product_container {
+        width: 100%;
+        margin: 0 auto;
+        padding: 0.1em;
+        font-size: small;
+    }
+    }
