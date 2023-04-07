@@ -1,9 +1,8 @@
 import { useState, useEffect} from 'react'
 import { numberFormat } from '../form/numberFormat';
-import Container from '../layout/Container'
 import styles from './Company.module.css'
 import Select from '../form/Select'
-import SubmitButton from '../form/SubmitButton'
+
 
 function Company(){
 

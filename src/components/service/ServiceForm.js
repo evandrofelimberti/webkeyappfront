@@ -9,7 +9,7 @@ import UseToken from '../layout/UseToken'
 function ServiceForm({handleSubmit, btnText, projectData}){
     const [Itens, SetItens] = useState([])
     const [Produto, setProduto]= useState([])      
-    const { token, setToken } = UseToken();
+    const { token} = UseToken();
 
       useEffect(()=>{
       fetch("http://localhost:5028/api/Produto",{

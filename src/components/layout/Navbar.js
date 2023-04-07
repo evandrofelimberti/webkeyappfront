@@ -8,7 +8,7 @@ import UseToken from './UseToken';
 function Navbar(){
 
   const [nav, setNav] = useState(false);
-  const { token, setToken } = UseToken();   
+  const { token} = UseToken();   
   
   const handleNav = () => {
     setNav(!nav);

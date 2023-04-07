@@ -1,9 +1,5 @@
 import styles from '../project/ProjectCard.module.css'
-
-import { Link } from 'react-router-dom'
-
-import {BsPencil, BsFillTrashFill} from 'react-icons/bs'
-
+import {BsFillTrashFill} from 'react-icons/bs'
 import { numberFormat } from '../form/numberFormat';
 
 function ServiceCad({id, Descricao, Quantidade, Produto, Valor, Total,  handleRemove}){

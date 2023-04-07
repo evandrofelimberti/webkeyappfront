@@ -6,6 +6,7 @@ import styles from './Product.module.css'
 const ProductAdd = () => {
   const initialProdutoState = {
     Id: null,
+    Codigo: null,
     Nome: "",
     Descricao: "",
     UnidadeId: null,
@@ -21,14 +22,19 @@ const ProductAdd = () => {
 
   const saveProduto = () => {
     var data = {
+      Id: produto.Id,
+      Codigo: produto.Codigo,
       Nome: produto.Nome,
-      Descricao: produto.Descricao
+      Descricao: produto.Descricao,
+      UnidadeId: produto.UnidadeId,
+      TipoProdutoId: produto.TipoProdutoId      
     };
 
     ProductService.create(data)
       .then(response => {
         setProduto({
           Id: response.data.Id,
+          Codigo: response.data.Codigo,
           Nome: response.data.Nome,
           Descricao: response.data.Descricao,
           UnidadeId: response.data.UnidadeId,
@@ -59,7 +65,20 @@ const ProductAdd = () => {
       ) : (
         <div>
           <div className="form-group">
-            <label htmlFor="title">Nome</label>
+            <label htmlFor="Codigo">Codigo</label>
+            <input
+              type="text"
+              className="form-control"
+              id="Codigo"
+              required
+              value={produto.Codigo}
+              onChange={handleInputChange}
+              name="Codigo"
+              autocomplete="off"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="Nome">Nome</label>
             <input
               type="text"
               className="form-control"
@@ -68,9 +87,9 @@ const ProductAdd = () => {
               value={produto.Nome}
               onChange={handleInputChange}
               name="Nome"
+              autocomplete="off"
             />
           </div>
-
           <div className="form-group">
             <label htmlFor="Descricao">Descricao</label>
             <input
@@ -81,6 +100,33 @@ const ProductAdd = () => {
               value={produto.Descricao}
               onChange={handleInputChange}
               name="Descricao"
+              autocomplete="off"
+            />
+          </div>          
+          <div className="form-group">
+            <label htmlFor="Unidade">Unidade</label>
+            <input
+              type="text"
+              className="form-control"
+              id="UnidadeId"
+              required
+              value={produto.UnidadeId}
+              onChange={handleInputChange}
+              name="UnidadeId"
+              autocomplete="off"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="TipoProduto">Tipo Produto</label>
+            <input
+              type="text"
+              className="form-control"
+              id="TipoProdutoId"
+              required
+              value={produto.TipoProdutoId}
+              onChange={handleInputChange}
+              name="TipoProdutoId"
+              autocomplete="off"
             />
           </div>
 

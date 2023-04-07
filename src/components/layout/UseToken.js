@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+
 function UseToken(){
     const getToken = () => {   
         const tokenString = localStorage.getItem('token');

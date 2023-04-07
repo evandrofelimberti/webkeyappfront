@@ -1,8 +1,8 @@
-import styles from './Product.module.css'
-import UseToken from '../layout/UseToken'
 import React, { useState, useEffect, useMemo, useRef} from "react";
 import ProductService from "../../services/ProductService";
 import { useTable } from "react-table";
+import { Link } from "react-router-dom";
+import Product from "./Product";
 
 const ProductsList = (props) => {
     const [produtos, setProdutos] = useState([]);
@@ -45,15 +45,14 @@ const ProductsList = (props) => {
     };
   
     const openProduto = (rowIndex) => {
-      const id = produtosRef.current[rowIndex].id;
-  
-      props.history.push("/product/" + id);
+      const Id = produtosRef.current[rowIndex].Id;       
+      props.history.push("/product/" + Id);
     };
   
     const deleteProduto = (rowIndex) => {
-      const id = produtosRef.current[rowIndex].id;
+      const Id = produtosRef.current[rowIndex].Id;
   
-      ProductService.remove(id)
+      ProductService.remove(Id)
         .then((response) => {
           props.history.push("/products");
   
@@ -66,8 +65,17 @@ const ProductsList = (props) => {
           console.log(e);
         });
     };
+    
     const columns = useMemo(
         () => [
+          {
+            Header: "Id",
+            accessor: "Id",
+          },           
+          {
+            Header: "Codigo",
+            accessor: "Codigo",
+          },           
           {
             Header: "Nome",
             accessor: "Nome",
@@ -76,18 +84,20 @@ const ProductsList = (props) => {
             Header: "Descrição",
             accessor: "Descricao",
           },
-        /*  {
-            Header: "Status",
-            accessor: "published",
-            Cell: (props) => {
-              return props.value ? "Published" : "Pending";
-            },
-          },*/
+
           {
-            Header: "Actions",
+            Header: "UnidadeId",
+            accessor: "UnidadeId",
+          },          
+          {
+            Header: "TipoProdutoId",
+            accessor: "TipoProdutoId",
+          },
+          {
+            Header: "Ação",
             accessor: "actions",
-            Cell: (props) => {
-              const rowIdx = props.row.Id;
+            Cell: props => {
+              const rowIdx = props.cell.row.id;
               return (
                 <div>
                   <span onClick={() => openProduto(rowIdx)}>

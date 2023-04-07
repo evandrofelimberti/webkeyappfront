@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import ProductService from "../../services/ProductService";
-
+import { useParams } from "react-router-dom";
 
 const Product = props => {
+  const { id } = useParams();
+    
     const initialProdutoState = {
         Id: null,
         Nome: "",
@@ -13,8 +15,8 @@ const Product = props => {
   const [recuperarProduto, setRecuperarProduto] = useState(initialProdutoState);
   const [message, setMessage] = useState("");
 
-  const getTutorial = id => {
-    ProductService.get(id)
+  const getProduto = Id => {
+    ProductService.get(Id)
       .then(response => {
         setRecuperarProduto(response.data);
         console.log(response.data);
@@ -25,8 +27,10 @@ const Product = props => {
   };
 
   useEffect(() => {
-    getTutorial(props.match.params.id);
-  }, [props.match.params.id]);
+    getProduto(id);
+// getProduto(this.props.match.params.id);    
+//}, [this.props.match.params.id]);
+  }, [id]);
 
   const handleInputChange = event => {
     const { name, value } = event.target;
@@ -36,6 +40,7 @@ const Product = props => {
   const updatePublished = status => {
     var data = {
       Id: recuperarProduto.Id,
+      Codigo: recuperarProduto.Codigo,      
       Nome: recuperarProduto.Nome,
       Descricao: recuperarProduto.Descricao,
       UnidadeId: recuperarProduto.UnidadeId,      
@@ -81,6 +86,17 @@ const Product = props => {
         <div className="edit-form">
           <h4>Produto</h4>
           <form>
+          <div className="form-group">
+              <label htmlFor="Codigo">Codigo</label>
+              <input
+                type="text"
+                className="form-control"
+                id="Codigo"
+                name="Codigo"
+                value={recuperarProduto.Codigo}
+                onChange={handleInputChange}
+              />
+            </div>            
             <div className="form-group">
               <label htmlFor="Nome">Nome</label>
               <input
@@ -103,6 +119,28 @@ const Product = props => {
                 onChange={handleInputChange}
               />
             </div>
+            <div className="form-group">
+              <label htmlFor="Unidade">Unidade</label>
+              <input
+                type="text"
+                className="form-control"
+                id="UnidadeId"
+                name="UnidadeId"
+                value={recuperarProduto.UnidadeId}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="TipoProduto">Tipo Produto</label>
+              <input
+                type="text"
+                className="form-control"
+                id="TipoProdutoId"
+                name="TipoProdutoId"
+                value={recuperarProduto.TipoProdutoId}
+                onChange={handleInputChange}
+              />
+            </div>                        
 
            {/* <div className="form-group">
               <label>
@@ -128,17 +166,17 @@ const Product = props => {
             </button>
           )}*/}
 
-          <button className="badge badge-danger mr-2" onClick={deleteProduto}>
+          <button onClick={deleteProduto}>
             Delete
           </button>
 
           <button
             type="submit"
-            className="badge badge-success"
             onClick={updateProduto}
           >
             Update
           </button>
+
           <p>{message}</p>
         </div>
       ) : (

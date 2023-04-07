@@ -1,5 +1,6 @@
 
 import {BrowserRouter as Router,Routes, Route} from 'react-router-dom'
+import { Switch, Link } from "react-router-dom";
 import Home from './components/pages/Home'
 import Projects from './components/pages/Projects'
 import Company from './components/pages/Company'
@@ -17,6 +18,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "@fortawesome/fontawesome-free/js/all.js";
 import ProductsList from './components/pages/ProductsList'
+import ProductAdd from './components/pages/ProductAdd'
 
 function App() {
   const { token, setToken } = UseToken(); 
@@ -34,9 +36,12 @@ function App() {
     <Route  path="/projects" element={ <Projects />}> </Route>    
     <Route  path="/company" element={ <Company />}> </Route>
     <Route  path="/contact" element={ <Contact />}> </Route>
-    <Route  path="/products" element={ <ProductsList />}> </Route>
+    <Route  path="/products" element={<ProductsList/>} />    
     <Route  path="/newproject" element={ <NewProject />}> </Route>
     <Route  path="/project/:id" element={ <Project />}> </Route>
+    <Route  path="/productAdd" element={ <ProductAdd />}> </Route>    
+    {/*<Route  path="/product/:id" element={ <Product />}> </Route>        */}
+    <Route path="/product/:id" component={Product} />    
    </Routes>  
    </Container>
     <Footer/> 
