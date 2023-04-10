@@ -55,22 +55,16 @@ const ProductsList = (props) => {
   
 
 
-    const deleteProduto = (rowIndex) => {   
-      //const Id = produtosRef.current[rowIndex].Id;
-  
-      {/*ProductService.remove(Id)
+    function deleteProduto(rowIndex){   
+      {
+        ProductService.remove(rowIndex)
         .then((response) => {
-          <Link to={`/products`}> </Link>
-          props.history.push("/products");
-  
-          let newProdutos = [...produtosRef.current];
-          newProdutos.splice(rowIndex, 1);
-  
-          setProdutos(newProdutos);
+            window.location.href = '/products';         
         })
         .catch((e) => {
           console.log(e);
-        });*/}
+        });
+         }
     };
     
     const columns = useMemo(
@@ -120,34 +114,32 @@ const ProductsList = (props) => {
             minWidth:40,
             width:90,
             Cell: props => {
-              const rowIdx = props.cell.row.values['Id'];
+              const rowIdx = props.cell.row.original['Id'];
               return (
 
                 <div >
+                <button>
                 <Link to={`/product/${rowIdx}`}> 
                     <BsPencil /> Editar
                 </Link>
+                </button>  
 
             <button onClick ={() => {
 
             ProductService.remove(rowIdx)
-        .then((response) => {
-           {/* let newProdutos = [...produtosRef.current];
-            newProdutos.filter(item => item["Id"] !== rowIdx)
-            setProdutos(newProdutos);
-        {props.cell.row = undefined}  */}  
-            window.location.href = '/products';         
-            //<Link to={`/products`}> </Link>            
-        })
-        .catch((e) => {
-          console.log(e);
-        });
+            .then((response) => {
+                window.location.href = '/products';         
+                //<Link to={`/products`}> </Link>            
+            })
+            .catch((e) => {
+              console.log(e);
+            });
 
 
               }}> <BsFillTrashFill /> Excluir </button>
 
 
-                {/*<button onClick={deleteProduto(rowIdx)}>
+              {/*  <button onClick={()=>{deleteProduto(rowIdx)}}>
                     <BsFillTrashFill /> Excluir
             </button>*/}
             </div>                
