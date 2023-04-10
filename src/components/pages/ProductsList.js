@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useMemo, useRef} from "react";
 import ProductService from "../../services/ProductService";
 import { useTable } from "react-table";
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom'
 import Product from "./Product";
+import { Route , withRouter} from 'react-router-dom';
+import {BsPencil, BsFillTrashFill} from 'react-icons/bs'
+import styles from './ProductsList.module.css'
 
 const ProductsList = (props) => {
     const [produtos, setProdutos] = useState([]);
@@ -46,14 +49,18 @@ const ProductsList = (props) => {
   
     const openProduto = (rowIndex) => {
       const Id = produtosRef.current[rowIndex].Id;       
-      props.history.push("/product/" + Id);
+      <Link to={`/product/${Id}`}> </Link>
+    //  this.props.history.push("/product/" + Id);
     };
   
-    const deleteProduto = (rowIndex) => {
-      const Id = produtosRef.current[rowIndex].Id;
+
+
+    const deleteProduto = (rowIndex) => {   
+      //const Id = produtosRef.current[rowIndex].Id;
   
-      ProductService.remove(Id)
+      {/*ProductService.remove(Id)
         .then((response) => {
+          <Link to={`/products`}> </Link>
           props.history.push("/products");
   
           let newProdutos = [...produtosRef.current];
@@ -63,51 +70,90 @@ const ProductsList = (props) => {
         })
         .catch((e) => {
           console.log(e);
-        });
+        });*/}
     };
     
     const columns = useMemo(
-        () => [
-          {
-            Header: "Id",
-            accessor: "Id",
-          },           
+        () => [          
           {
             Header: "Codigo",
             accessor: "Codigo",
+            maxWidth: 60,
+            minWidth:20,
+            width:50,
+          
           },           
           {
             Header: "Nome",
             accessor: "Nome",
+            maxWidth: 300,
+            minWidth:100,
+            width:180,
           },
           {
             Header: "Descrição",
             accessor: "Descricao",
+            maxWidth: 300,
+            minWidth:100,
+            width:250,
           },
 
           {
             Header: "UnidadeId",
             accessor: "UnidadeId",
+            maxWidth: 80,
+            minWidth:10,
+            width:80,
+            
           },          
           {
             Header: "TipoProdutoId",
             accessor: "TipoProdutoId",
+            maxWidth: 100,
+            minWidth:10,
+            width:80,
           },
           {
             Header: "Ação",
             accessor: "actions",
+            maxWidth: 100,
+            minWidth:40,
+            width:90,
             Cell: props => {
-              const rowIdx = props.cell.row.id;
+              const rowIdx = props.cell.row.values['Id'];
               return (
-                <div>
-                  <span onClick={() => openProduto(rowIdx)}>
-                    <i className="far fa-edit action mr-2"></i>
-                  </span>
-    
-                  <span onClick={() => deleteProduto(rowIdx)}>
-                    <i className="fas fa-trash action"></i>
-                  </span>
-                </div>
+
+                <div >
+                <Link to={`/product/${rowIdx}`}> 
+                    <BsPencil /> Editar
+                </Link>
+
+            <button onClick ={() => {
+
+            ProductService.remove(rowIdx)
+        .then((response) => {
+           {/* let newProdutos = [...produtosRef.current];
+            newProdutos.filter(item => item["Id"] !== rowIdx)
+            setProdutos(newProdutos);
+        {props.cell.row = undefined}  */}  
+            window.location.href = '/products';         
+            //<Link to={`/products`}> </Link>            
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+
+
+              }}> <BsFillTrashFill /> Excluir </button>
+
+
+                {/*<button onClick={deleteProduto(rowIdx)}>
+                    <BsFillTrashFill /> Excluir
+            </button>*/}
+            </div>                
+                
+
+
               );
             },
           },
@@ -123,7 +169,7 @@ const ProductsList = (props) => {
         prepareRow,
       } = useTable({
         columns,
-        data: produtos,
+        data: produtos
       });
     
       return (
@@ -157,8 +203,11 @@ const ProductsList = (props) => {
                 {headerGroups.map((headerGroup) => (
                   <tr {...headerGroup.getHeaderGroupProps()}>
                     {headerGroup.headers.map((column) => (
-                      <th {...column.getHeaderProps()}>
-                        {column.render("Header")}
+                      <th {...column.getHeaderProps({style:{
+                        minWidth: column.minWidth,
+                        maxWidth: column.maxWidth,
+                        width:column.width}})}>
+                       <span>{column.render("Header")}</span> 
                       </th>
                     ))}
                   </tr>
@@ -171,7 +220,13 @@ const ProductsList = (props) => {
                     <tr {...row.getRowProps()}>
                       {row.cells.map((cell) => {
                         return (
-                          <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                          <td {...cell.getCellProps({
+                            style:{minWidth: cell.column.minWidth,
+                            width:cell.column.width}
+                          })}
+                          >
+                            {cell.render("Cell")}
+                          </td>
                         );
                       })}
                     </tr>

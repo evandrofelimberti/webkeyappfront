@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ProductService from "../../services/ProductService";
-import { useParams } from "react-router-dom";
+import {useParams} from 'react-router-dom'
 
 const Product = props => {
   const { id } = useParams();

@@ -14,6 +14,7 @@ import Project from './components/pages/Project'
 import Login from './components/layout/Login'
 import UseToken from './components/layout/UseToken'
 
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "@fortawesome/fontawesome-free/js/all.js";
@@ -40,8 +41,8 @@ function App() {
     <Route  path="/newproject" element={ <NewProject />}> </Route>
     <Route  path="/project/:id" element={ <Project />}> </Route>
     <Route  path="/productAdd" element={ <ProductAdd />}> </Route>    
-    {/*<Route  path="/product/:id" element={ <Product />}> </Route>        */}
-    <Route path="/product/:id" component={Product} />    
+    <Route  path="/product/:id" element={ <Product />}> </Route>        
+    {/*<Route path="/product/:id" element={Product} />    */}
    </Routes>  
    </Container>
     <Footer/> 
