@@ -33,12 +33,8 @@ const ProductsList = (props) => {
         });
     };
   
-    const refreshList = () => {
-      recuperarProdutos();
-    };
-   
-    const findByName = () => {
-      ProductService.findByTitle(searchName)
+    const recuperarProdutosFiltro = () => {
+      ProductService.findByNome(searchName)
         .then((response) => {
           setProdutos(response.data);
         })
@@ -46,6 +42,29 @@ const ProductsList = (props) => {
           console.log(e);
         });
     };
+
+    const refreshList = () => {
+      recuperarProdutos();
+    };
+   
+    {/*const findByName = () => {
+      ProductService.findByNome(searchName)
+        .then((response) => {
+          setProdutos(response.data);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    };*/}
+
+   
+    const findByName = () => {
+      if (searchName !== ''){
+        recuperarProdutosFiltro();
+      } else {
+        recuperarProdutos();
+      }
+    };    
   
     const openProduto = (rowIndex) => {
       const Id = produtosRef.current[rowIndex].Id;       
@@ -171,7 +190,7 @@ const ProductsList = (props) => {
               <input
                 type="text"
                 className="form-control"
-                placeholder="Search by title"
+                placeholder="Pesquisar pelo Nome"
                 value={searchName}
                 onChange={onChangeSearchName}
               />
@@ -181,7 +200,7 @@ const ProductsList = (props) => {
                   type="button"
                   onClick={findByName}
                 >
-                  Search
+                  Pesquisar
                 </button>
               </div>
             </div>

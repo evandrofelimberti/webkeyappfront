@@ -20,8 +20,8 @@ const remove = (id) => {
   return http.delete(`/produto/${id}`);
 };
 
-const findByName = (title) => {
-  return http.get(`/tutorials?title=${title}`);
+const findByNome = (nome) => {
+  return http.get(`/produto/Filtro?nome=${nome}`);   
 };
 
 const ProductService = {
@@ -30,7 +30,7 @@ const ProductService = {
   create,
   update,
   remove,
-  findByName,
+  findByNome,
 };
 
 export default ProductService;
