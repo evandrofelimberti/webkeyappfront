@@ -24,6 +24,10 @@ const findByNome = (nome) => {
   return http.get(`/produto/Filtro?nome=${nome}`);   
 };
 
+const getAllUnidade = () => {
+  return http.get("/unidade");
+};
+
 const ProductService = {
   getAll,
   get,
@@ -31,6 +35,7 @@ const ProductService = {
   update,
   remove,
   findByNome,
+  getAllUnidade
 };
 
 export default ProductService;

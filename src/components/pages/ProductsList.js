@@ -6,6 +6,8 @@ import Product from "./Product";
 import { Route , withRouter} from 'react-router-dom';
 import {BsPencil, BsFillTrashFill} from 'react-icons/bs'
 import styles from './ProductsList.module.css'
+import Input from '../form/Input'
+import LinkButton from "../layout/LinkButton";
 
 const ProductsList = (props) => {
     const [produtos, setProdutos] = useState([]);
@@ -89,83 +91,81 @@ const ProductsList = (props) => {
     const columns = useMemo(
         () => [          
           {
-            Header: "Codigo",
+            Header: "Código",
             accessor: "Codigo",
-            maxWidth: 60,
-            minWidth:20,
-            width:50,
+            maxWidth: 80,
+            minWidth:80,
+            width: 80,
           
           },           
           {
             Header: "Nome",
             accessor: "Nome",
-            maxWidth: 300,
-            minWidth:100,
-            width:180,
-          },
+            maxWidth: 400,
+            minWidth:200,
+            width:250,
+          },         
           {
             Header: "Descrição",
             accessor: "Descricao",
-            maxWidth: 300,
-            minWidth:100,
-            width:250,
+            maxWidth: 400,
+            minWidth:300,
+            width:350,
           },
-
           {
-            Header: "UnidadeId",
-            accessor: "UnidadeId",
-            maxWidth: 80,
-            minWidth:10,
-            width:80,
+            Header: "Saldo",
+            accessor: "Saldo",
+            maxWidth: 150,
+            minWidth:100,
+            width:110,
+          },
+          {
+            Header: "Unidade",
+            accessor: "Unidade.Descricao",
+            maxWidth: 110,
+            minWidth:100,
+            width:100,
             
           },          
           {
-            Header: "TipoProdutoId",
-            accessor: "TipoProdutoId",
-            maxWidth: 100,
-            minWidth:10,
-            width:80,
+            Header: "Tipo Produto",
+            accessor: "TipoProduto.Descricao",
+            maxWidth: 150,
+            minWidth:150,
+            width:150,
           },
           {
             Header: "Ação",
             accessor: "actions",
-            maxWidth: 100,
-            minWidth:40,
-            width:90,
+            maxWidth: 210,
+            minWidth:210,
+            width:210,
             Cell: props => {
               const rowIdx = props.cell.row.original['Id'];
               return (
-
                 <div >
-                <button>
-                <Link to={`/product/${rowIdx}`}> 
+
+                <Link className={styles.button} to={`/product/${rowIdx}`}> 
                     <BsPencil /> Editar
                 </Link>
-                </button>  
-
-            <button onClick ={() => {
-
-            ProductService.remove(rowIdx)
-            .then((response) => {
-                window.location.href = '/products';         
-                //<Link to={`/products`}> </Link>            
-            })
-            .catch((e) => {
-              console.log(e);
-            });
 
 
-              }}> <BsFillTrashFill /> Excluir </button>
+                <button className={styles.button}  onClick ={() => {
+                  ProductService.remove(rowIdx)
+                  .then((response) => {
+                      window.location.href = '/products';         
+                      //<Link to={`/products`}> </Link>            
+                  })
+                  .catch((e) => {
+                    console.log(e);
+                  });
+                    }}> <BsFillTrashFill /> Excluir </button>
 
-
-              {/*  <button onClick={()=>{deleteProduto(rowIdx)}}>
-                    <BsFillTrashFill /> Excluir
-            </button>*/}
-            </div>                
-                
-
-
-              );
+                    {/*  <button onClick={()=>{deleteProduto(rowIdx)}}>
+                          <BsFillTrashFill /> Excluir
+                  </button>*/}
+                  </div>                               
+                  );
             },
           },
         ],
@@ -184,24 +184,31 @@ const ProductsList = (props) => {
       });
     
       return (
-        <div className="list row">
-          <div className="col-md-8">
-            <div className="input-group mb-3">
-              <input
+        <div >
+          <div >
+            <div >
+            {/*<Input 
+            type="text" 
+            placeholder="Pesquisar pelo Nome"
+            handleOnChange={onChangeSearchName}
+            value={searchName}
+            />*/}               
+              <input className={styles.input}
                 type="text"
-                className="form-control"
                 placeholder="Pesquisar pelo Nome"
                 value={searchName}
                 onChange={onChangeSearchName}
               />
-              <div className="input-group-append">
-                <button
-                  className="btn btn-outline-secondary"
+              <div >
+                <button className={styles.buttonPesquisa}
                   type="button"
                   onClick={findByName}
                 >
                   Pesquisar
                 </button>
+                
+                <Link className={styles.btnLink} to="/productadd"> Cadastrar Produto</Link>                
+
               </div>
             </div>
           </div>

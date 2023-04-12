@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import ProductService from "../../services/ProductService";
 import {useParams} from 'react-router-dom'
+import Input from "../form/Input";
+import styles from './ProductAdd.module.css';
+import Select from "../form/Select";
+
 
 const Product = props => {
   const { id } = useParams();
@@ -12,7 +16,14 @@ const Product = props => {
         UnidadeId: null,
         TipoProdutoId: null
       };
+
+    const initialUnidadeState = {
+      Id: null,
+      Descricao: "",
+      Sigla: ""
+    }  
   const [recuperarProduto, setRecuperarProduto] = useState(initialProdutoState);
+  const [recuperarUnidade, setRecuperarUnidade] = useState(initialUnidadeState);
   const [message, setMessage] = useState("");
 
   const getProduto = Id => {
@@ -24,13 +35,28 @@ const Product = props => {
       .catch(e => {
         console.log(e);
       });
-  };
+  };  
+
+  const getAllUnidade = () => {
+    ProductService.getAllUnidade()
+      .then(response => {
+        setRecuperarUnidade(response.data);
+        console.log(response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };  
 
   useEffect(() => {
     getProduto(id);
 // getProduto(this.props.match.params.id);    
 //}, [this.props.match.params.id]);
   }, [id]);
+
+  useEffect(() => {
+    getAllUnidade()
+  });  
 
   const handleInputChange = event => {
     const { name, value } = event.target;
@@ -51,7 +77,7 @@ const Product = props => {
       .then(response => {
         setRecuperarProduto({ ...recuperarProduto, published: status });
         console.log(response.data);
-        setMessage("The status was updated successfully!");
+        setMessage("Produto Atualizado!");
       })
       .catch(e => {
         console.log(e);
@@ -62,7 +88,7 @@ const Product = props => {
     ProductService.update(recuperarProduto.Id, recuperarProduto)
       .then(response => {
         console.log(response.data);
-        setMessage("The tutorial was updated successfully!");
+        setMessage("Produto Atualizado!");
       })
       .catch(e => {
         console.log(e);
@@ -73,7 +99,7 @@ const Product = props => {
     ProductService.remove(recuperarProduto.Id)
       .then(response => {
         console.log(response.data);
-        props.history.push("/products");
+        window.location.href = '/products';  
       })
       .catch(e => {
         console.log(e);
@@ -81,100 +107,71 @@ const Product = props => {
   };
 
   return (
-    <div>
+    <div className={styles.form}>
       {recuperarProduto ? (
         <div className="edit-form">
-          <h4>Produto</h4>
-          <form>
-          <div className="form-group">
-              <label htmlFor="Codigo">Codigo</label>
-              <input
-                type="text"
-                className="form-control"
-                id="Codigo"
+          <form>          
+            <Input 
+                type="text" 
+                text="Código"
                 name="Codigo"
-                value={recuperarProduto.Codigo}
-                onChange={handleInputChange}
-              />
-            </div>            
-            <div className="form-group">
-              <label htmlFor="Nome">Nome</label>
-              <input
-                type="text"
-                className="form-control"
-                id="Nome"
+                placeholder="Código do produto "
+                handleOnChange={handleInputChange}
+                value={recuperarProduto.Codigo ? recuperarProduto.Codigo: ''}
+            />
+            <Input 
+                type="text" 
+                text="Nome"
                 name="Nome"
-                value={recuperarProduto.Nome}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="Descricao">Descrição</label>
-              <input
-                type="text"
-                className="form-control"
-                id="Descricao"
+                placeholder="Digite o Nome do produto "
+                handleOnChange={handleInputChange}
+                value={recuperarProduto.Nome ? recuperarProduto.Nome: ''}
+            />
+            <Input 
+                type="text" 
+                text="Descrição"
                 name="Descricao"
-                value={recuperarProduto.Descricao}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="Unidade">Unidade</label>
-              <input
-                type="text"
-                className="form-control"
-                id="UnidadeId"
-                name="UnidadeId"
-                value={recuperarProduto.UnidadeId}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="TipoProduto">Tipo Produto</label>
-              <input
-                type="text"
-                className="form-control"
-                id="TipoProdutoId"
-                name="TipoProdutoId"
-                value={recuperarProduto.TipoProdutoId}
-                onChange={handleInputChange}
-              />
-            </div>                        
+                placeholder="Digite a Descrição do produto "
+                handleOnChange={handleInputChange}
+                value={recuperarProduto.Descricao ? recuperarProduto.Descricao: ''}
+            />            
 
-           {/* <div className="form-group">
-              <label>
-                <strong>Status:</strong>
-              </label>
-              {recuperarProduto.published ? "Published" : "Pending"}
-      </div>*/}
+          <Input 
+                type="text" 
+                text="Unidade"
+                name="UnidadeId"
+                placeholder="Digite a Unidade de medida"                
+                handleOnChange={handleInputChange}
+                value={recuperarProduto.UnidadeId ? recuperarProduto.UnidadeId: ''}
+      />   
+
+           {/* <Select 
+                name="UnidadeId" 
+                text="Unidade" 
+                options={recuperarUnidade} 
+                handleOnChange={handleInputChange}
+                value={recuperarProduto.UnidadeId ? recuperarProduto.Unidade.Id : ''}
+      />*/}
+          <Input 
+                type="text" 
+                text="Tipo Produto"
+                name="TipoProdutoId"
+                placeholder="Digite o Tipo do produto"                
+                handleOnChange={handleInputChange}
+                value={recuperarProduto.TipoProdutoId ? recuperarProduto.TipoProdutoId: ''}
+            />                       
           </form>
 
-         {/* {recuperarProduto.published ? (
-            <button
-              className="badge badge-primary mr-2"
-              onClick={() => updatePublished(false)}
-            >
-              UnPublish
-            </button>
-          ) : (
-            <button
-              className="badge badge-primary mr-2"
-              onClick={() => updatePublished(true)}
-            >
-              Publish
-            </button>
-          )}*/}
-
-          <button onClick={deleteProduto}>
-            Delete
+          <button onClick={deleteProduto} className={styles.btn}>
+            Deletar
           </button>
 
           <button
             type="submit"
             onClick={updateProduto}
+            className={styles.btn}
           >
-            Update
+            Atualizar
           </button>
 
           <p>{message}</p>
@@ -182,7 +179,7 @@ const Product = props => {
       ) : (
         <div>
           <br />
-          <p>Please click on a Tutorial...</p>
+          <p>Clique em Produtos</p>
         </div>
       )}
     </div>

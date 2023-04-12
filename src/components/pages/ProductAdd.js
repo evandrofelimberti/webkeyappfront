@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import ProductService from "../../services/ProductService";
-import styles from './Product.module.css'
 import { Route , withRouter} from 'react-router-dom';
+import Input from "../form/Input";
+import styles from './ProductAdd.module.css';
+import SubmitButton from "../form/SubmitButton";
+
 
 
 const ProductAdd = () => {
@@ -55,88 +58,75 @@ const ProductAdd = () => {
   };
 
   return (
-    <div className="submit-form">
+   // <form onSubmit={saveProduto} className={styles.form}>
+  <div className={styles.form}>
       {submitted ? (
         <div>
-          <h4>You submitted successfully!</h4>
-          <button className="btn btn-success" onClick={newProduto}>
-            Add
-          </button>
+          <h4>Produto Cadastrado com sucesso!</h4>
+          
+          <button onClick={newProduto} className={styles.btn}>
+            Adicionar Novo Produto
+          </button>          
         </div>
       ) : (
         <div>
-          <div className="form-group">
-            <label htmlFor="Codigo">Codigo</label>
-            <input
-              type="text"
-              className="form-control"
-              id="Codigo"
-              required
-              value={produto.Codigo}
-              onChange={handleInputChange}
-              name="Codigo"
-              autocomplete="off"
+          <div >
+            <Input 
+                type="text" 
+                text="Código"
+                name="Codigo"
+                placeholder="Código do produto "
+                handleOnChange={handleInputChange}
+                value={produto.Codigo ? produto.Codigo: ''}
             />
-          </div>
-          <div className="form-group">
-            <label htmlFor="Nome">Nome</label>
-            <input
-              type="text"
-              className="form-control"
-              id="Nome"
-              required
-              value={produto.Nome}
-              onChange={handleInputChange}
-              name="Nome"
-              autocomplete="off"
+            <Input 
+                type="text" 
+                text="Nome"
+                name="Nome"
+                placeholder="Digite o Nome do produto "
+                handleOnChange={handleInputChange}
+                value={produto.Nome ? produto.Nome: ''}
             />
-          </div>
-          <div className="form-group">
-            <label htmlFor="Descricao">Descricao</label>
-            <input
-              type="text"
-              className="form-control"
-              id="Descricao"
-              required
-              value={produto.Descricao}
-              onChange={handleInputChange}
-              name="Descricao"
-              autocomplete="off"
-            />
-          </div>          
-          <div className="form-group">
-            <label htmlFor="Unidade">Unidade</label>
-            <input
-              type="text"
-              className="form-control"
-              id="UnidadeId"
-              required
-              value={produto.UnidadeId}
-              onChange={handleInputChange}
-              name="UnidadeId"
-              autocomplete="off"
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="TipoProduto">Tipo Produto</label>
-            <input
-              type="text"
-              className="form-control"
-              id="TipoProdutoId"
-              required
-              value={produto.TipoProdutoId}
-              onChange={handleInputChange}
-              name="TipoProdutoId"
-              autocomplete="off"
-            />
-          </div>
+            <Input 
+                type="text" 
+                text="Descrição"
+                name="Descricao"
+                placeholder="Digite a Descrição do produto "
+                handleOnChange={handleInputChange}
+                value={produto.Descricao ? produto.Descricao: ''}
+            />            
+            <Input 
+                  type="text" 
+                  text="Unidade"
+                  name="UnidadeId"
+                  placeholder="Digite a Unidade de medida"                
+                  handleOnChange={handleInputChange}
+                  value={produto.UnidadeId ? produto.UnidadeId: ''}
+              />   
+            <Input 
+                  type="text" 
+                  text="Tipo Produto"
+                  name="TipoProdutoId"
+                  placeholder="Digite o Tipo do produto"                
+                  handleOnChange={handleInputChange}
+                  value={produto.TipoProdutoId ? produto.TipoProdutoId: ''}
+              />              
 
-          <button onClick={saveProduto} className="btn btn-success">
-            Submit
+          </div>      
+
+        {/*  <SubmitButton text="Salvar"/>*/}
+
+          <button onClick={saveProduto} className={styles.btn}>
+            Salvar
           </button>
         </div>
       )}
     </div>
+
+   // </form> 
+
+
+
   );
 };
 

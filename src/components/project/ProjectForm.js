@@ -65,7 +65,7 @@ function ProjectForm({handleSubmit, btnText, projectData}){
         setMovimento({...Movimento, [e.target.name]: e.target.value})
     }
 
-    function handleCategory(e){
+    function handleTipoMovimento(e){
         setMovimento({
             ...Movimento,
             TipoMovimentoId: e.target.value,
@@ -126,7 +126,7 @@ function ProjectForm({handleSubmit, btnText, projectData}){
             name="TipoMovimentoId" 
             text="Selecione o Tipo" 
             options={TipoMovimento} 
-            handleOnChange={handleCategory}
+            handleOnChange={handleTipoMovimento}
             value={Movimento.TipoMovimento ? Movimento.TipoMovimento.Id : ''}
         />
         <Select 

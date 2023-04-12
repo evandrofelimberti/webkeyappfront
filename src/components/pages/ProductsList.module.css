@@ -1,13 +1,130 @@
-.list .action {
-    cursor: pointer;
+  .details_container,
+  .service_form_container{
+      border-bottom: 1px solid #7a7a7a;
+      margin-bottom: 1.2em;
+      padding-bottom: 1.2em;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+  }  
+
+.project_card_actions{
+  margin-top: 0.9em;
+  display: flex;
+  align-items: center;  
+}
+
+.input{
+  display: flex;
+  width: 250px;
   }
+
+.button{  
+  text-decoration: none;
+  border: none;
+  background-color: #fff;
+  color: #222;
+  font-size: .9em;
+  padding: .4em .5em;
+  margin-right: 0.5em;
+  cursor: pointer;
+  border: 0.1px solid #222;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.5s;
+  width: 85px;
+}
+
+.button svg{
+  margin-right: .2em;
+}
+
+.button:hover{
+    background-color: #222;
+    color: #ffbb33;
+}
+
+.buttonPesquisa{  
+  text-decoration: none;
+  border: none;
+  background-color: #fff;
+  color: #222;
+  font-size: .9em;
+  padding: .4em .5em;
+  margin-right: 0.5em;
+  cursor: pointer;
+  border: 0.1px solid #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.5s;
+  width: 85px;
+  float: left;
+  height: 40px;
+
+  margin-right: 0.5em;    
+  margin-top: 0.3em;    
+  margin-bottom: 0.3em;   
+}
+
+.buttonPesquisa svg{
+  margin-right: .2em;
+}
+
+.buttonPesquisa:hover{
+    background-color: #222;
+    color: #ffbb33;
+}
+
+.container_pesquisa{
+  margin-right: 0.5em;    
+  margin-top: 0.3em;    
+  margin-bottom: 0.3em;   
+}
+
+.input{
+    padding: .7em;
+    border-radius: 1;
+    border: none;
+    display: flex;
+    float: left;
+    flex-direction: column;
+    height: 40px;
+    width: 350px;
+    margin-right: 0.5em;    
+    margin-top: 0.3em;    
+    margin-bottom: 0.3em;     
+}
   
-  .submit-form {
-    max-width: 300px;
-    margin: auto;
-  }
-  
-  .edit-form {
-    max-width: 300px;
-    margin: auto;
-  }
+.input::placeholder{
+    color: #7b7b7b;
+}
+
+.btnLink {
+  text-decoration: none;
+  border: none;
+  background-color: #222;
+  color: #fff;
+  font-size: .9em;
+  padding: .4em .5em;
+  margin-right: 0.5em;
+  cursor: pointer;
+  border: 0.1px solid #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.5s;
+  width: 150px;
+  float: right;
+  height: 45px;
+
+  margin-right: 0.1em;    
+  margin-top: 0.3em;    
+  margin-bottom: 0.3em;   
+
+}
+
+.btnLink:hover {
+  color: #ffbb33;
+}

@@ -15,9 +15,6 @@ import Login from './components/layout/Login'
 import UseToken from './components/layout/UseToken'
 
 
-import "bootstrap/dist/css/bootstrap.min.css";
-import "@fortawesome/fontawesome-free/css/all.css";
-import "@fortawesome/fontawesome-free/js/all.js";
 import ProductsList from './components/pages/ProductsList'
 import ProductAdd from './components/pages/ProductAdd'
 

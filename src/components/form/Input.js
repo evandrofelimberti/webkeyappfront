@@ -3,7 +3,7 @@ import styles from './Input.module.css'
 function Input({type, text, name, placeholder, handleOnChange, value, format}){
     return(
         <div className={styles.form_control} > 
-            <label htmlFor={name}>{text}:</label>         
+            {name ? ( <label htmlFor={name}>{text}:</label> ) : (<></>)}        
             <input  
             type={type} 
             name={name}
@@ -12,6 +12,7 @@ function Input({type, text, name, placeholder, handleOnChange, value, format}){
             onChange={handleOnChange}
             value={value}
             format={format}
+            autocomplete="off"
             />
             
         </div>
