@@ -28,6 +28,10 @@ const getAllUnidade = () => {
   return http.get("/unidade");
 };
 
+const getAllTipoProduto = () => {
+  return http.get("/tipoproduto");
+};
+
 const ProductService = {
   getAll,
   get,
@@ -35,7 +39,8 @@ const ProductService = {
   update,
   remove,
   findByNome,
-  getAllUnidade
+  getAllUnidade,
+  getAllTipoProduto
 };
 
 export default ProductService;

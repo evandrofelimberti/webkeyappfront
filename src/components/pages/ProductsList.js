@@ -8,10 +8,14 @@ import {BsPencil, BsFillTrashFill} from 'react-icons/bs'
 import styles from './ProductsList.module.css'
 import Input from '../form/Input'
 import LinkButton from "../layout/LinkButton";
+import Container from "../layout/Container";
+import Message from '../layout/Message'
 
 const ProductsList = (props) => {
     const [produtos, setProdutos] = useState([]);
     const [searchName, setSearchName] = useState("");
+    const [message, setMessage] = useState();
+    const [type, setType] = useState();
     const produtosRef = useRef();
   
     produtosRef.current = produtos;
@@ -48,18 +52,7 @@ const ProductsList = (props) => {
     const refreshList = () => {
       recuperarProdutos();
     };
-   
-    {/*const findByName = () => {
-      ProductService.findByNome(searchName)
-        .then((response) => {
-          setProdutos(response.data);
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    };*/}
-
-   
+     
     const findByName = () => {
       if (searchName !== ''){
         recuperarProdutosFiltro();
@@ -73,8 +66,6 @@ const ProductsList = (props) => {
       <Link to={`/product/${Id}`}> </Link>
     //  this.props.history.push("/product/" + Id);
     };
-  
-
 
     function deleteProduto(rowIndex){   
       {
@@ -130,9 +121,9 @@ const ProductsList = (props) => {
           {
             Header: "Tipo Produto",
             accessor: "TipoProduto.Descricao",
-            maxWidth: 150,
+            maxWidth: 180,
             minWidth:150,
-            width:150,
+            width:180,
           },
           {
             Header: "Ação",
@@ -149,21 +140,20 @@ const ProductsList = (props) => {
                     <BsPencil /> Editar
                 </Link>
 
-
                 <button className={styles.button}  onClick ={() => {
                   ProductService.remove(rowIdx)
                   .then((response) => {
-                      window.location.href = '/products';         
+                    setMessage('Produto Removido!');
+                    setType('success');                 
+                    window.location.href = '/products';         
                       //<Link to={`/products`}> </Link>            
                   })
                   .catch((e) => {
+                    setMessage("Erro ao deletar o produto Id " + rowIdx + "\n" + e.response.data)
+                    setType('error')                    
                     console.log(e);
                   });
                     }}> <BsFillTrashFill /> Excluir </button>
-
-                    {/*  <button onClick={()=>{deleteProduto(rowIdx)}}>
-                          <BsFillTrashFill /> Excluir
-                  </button>*/}
                   </div>                               
                   );
             },
@@ -185,14 +175,9 @@ const ProductsList = (props) => {
     
       return (
         <div >
-          <div >
-            <div >
-            {/*<Input 
-            type="text" 
-            placeholder="Pesquisar pelo Nome"
-            handleOnChange={onChangeSearchName}
-            value={searchName}
-            />*/}               
+          <div className={styles.project_details}>
+            {message && <Message type={type} msg={message} /> }                        
+            <div >              
               <input className={styles.input}
                 type="text"
                 placeholder="Pesquisar pelo Nome"
