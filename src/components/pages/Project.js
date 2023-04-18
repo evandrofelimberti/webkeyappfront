@@ -18,6 +18,11 @@ function Project(){
     const [message, setMessage] = useState()
     const [type, setType] = useState()
     const [Itens, setItens] = useState([])
+    const tipoFront = localStorage.getItem('tipoSistema');      
+
+    function sistemaFrontLavoura(){
+        return tipoFront == 'lavoura'
+    }      
 
     useEffect(() => {
         setTimeout(
@@ -38,8 +43,7 @@ function Project(){
                  .catch((err) => console.log(err)) 
             }, 1000)
 
-    }, [id]) 
-    
+    }, [id])     
 
     function createService(movimento){
         // ultimo servico
@@ -171,8 +175,6 @@ function Project(){
         }).catch((err) => console.log(err))         
     }
 
-
-
     return(        
         <>
         {Movimento.Id ? (
@@ -188,7 +190,7 @@ function Project(){
                                 <div className={styles.project_info}>
                                     <p><span>Descricao:</span> {Movimento.Observacao}</p>
                                     <p><span>Tipo Movimento:</span> {Movimento.TipoMovimento.Descricao}</p>
-                                    {((Movimento.MovimentoLavoura !== null)&&(Movimento.hasOwnProperty("MovimentoLavoura.Lavoura"))) &&
+                                    {(sistemaFrontLavoura()) &&
                                     <p><span>Lavoura:</span> {Movimento.MovimentoLavoura.Lavoura.Descricao} 
                                       - Área(ha): {Movimento.MovimentoLavoura.Lavoura.AreaHa}
                                     </p>}

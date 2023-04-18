@@ -46,6 +46,8 @@ function Projects(){
    
 
     function removeProject(id){
+
+        { window.confirm( 'Deseja deletar o Movimento?', ) &&         
         fetch(`http://localhost:5028/api/movimento/${id}`,{
             method:'DELETE',
             headers:{'Content-Type': 'application/json',
@@ -59,7 +61,8 @@ function Projects(){
                 setProjectMessage('Ocorreu erro ao deletar o movimento!') 
             }        
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log(err))    
+    }
     }
 
     return (

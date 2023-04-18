@@ -67,16 +67,23 @@ const ProductsList = (props) => {
     //  this.props.history.push("/product/" + Id);
     };
 
-    function deleteProduto(rowIndex){   
-      {
-        ProductService.remove(rowIndex)
-        .then((response) => {
-            window.location.href = '/products';         
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-         }
+    function deleteProduto(rowIndex){
+      { window.confirm( 'Deseja deletar o produto?', ) && 
+  
+      ProductService.remove(rowIndex)
+      .then((response) => {
+        setMessage('Produto Removido!');
+        setType('success');                 
+        window.location.href = '/products';         
+          //<Link to={`/products`}> </Link>            
+      })
+      .catch((e) => {
+        setMessage("Erro ao deletar o produto Id " + rowIndex + "\n" + e.response.data)
+        setType('error')                    
+        console.log(e);
+      });      
+
+    }
     };
     
     const columns = useMemo(
@@ -141,7 +148,10 @@ const ProductsList = (props) => {
                 </Link>
 
                 <button className={styles.button}  onClick ={() => {
-                  ProductService.remove(rowIdx)
+
+                  deleteProduto(rowIdx)
+
+                 /* ProductService.remove(rowIdx)
                   .then((response) => {
                     setMessage('Produto Removido!');
                     setType('success');                 
@@ -152,7 +162,7 @@ const ProductsList = (props) => {
                     setMessage("Erro ao deletar o produto Id " + rowIdx + "\n" + e.response.data)
                     setType('error')                    
                     console.log(e);
-                  });
+                  });*/
                     }}> <BsFillTrashFill /> Excluir </button>
                   </div>                               
                   );

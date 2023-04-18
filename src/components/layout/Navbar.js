@@ -8,14 +8,15 @@ import UseToken from './UseToken';
 function Navbar(){
 
   const [nav, setNav] = useState(false);
-  const { token} = UseToken();   
+  const { token} = UseToken();  
+  const tipoFront = localStorage.getItem('tipoSistema');  
   
   const handleNav = () => {
     setNav(!nav);
   };
 
   const handleLogout = ()=>{    
-    localStorage.clear();
+    localStorage.setItem('token','');    
     window.location.href = '/';    
   }  
     return(
@@ -26,20 +27,21 @@ function Navbar(){
         </h1>
           <ul className='hidden md:flex '>
                         <li className='p-4'>
-                        <Link to="/">Home</Link>
+                        <Link to="/">Início</Link>
                         </li>
                         <li className='p-4'>
-                        <Link to="/projects">Projects</Link>
+                        <Link to="/projects">Movimentações</Link>
                         </li>
                         <li className='p-4'>
-                        <Link to="/products">Products</Link>
-                        </li>                        
-                        <li className='p-4'>                    
-                        <Link to="/company">Company</Link>
-                        </li>
+                        <Link to="/products">Produtos</Link>
+                        </li>    
+                        {tipoFront == 'lavoura' && 
+                                                <li className='p-4'>                    
+                                                <Link to="/company">Listagem</Link>
+                                                </li>}
                         {token &&                        
                           <li className='p-4'>           
-                          <Link onClick={handleLogout} to="/"> Logout</Link>
+                          <Link onClick={handleLogout} to="/"> Sair</Link>
                           </li>
                         }                          
                         
@@ -51,13 +53,17 @@ function Navbar(){
             <h1 className='w-full text-3xl font-bold text-[#00df9a] m-4'>
                 <Link to="/"> <img src={logo} alt={"Costs"} /> </Link>
             </h1>
-              <li className='p-4 border-b border-gray-600'><Link to="/" onClick={<AiOutlineClose size={20}/>} >Home</Link></li>
-              <li className='p-4 border-b border-gray-600'><Link to="/projects" onClick={<AiOutlineClose size={20}/>} >Projects</Link></li>
-              <li className='p-4 border-b border-gray-600'><Link to="/products" onClick={<AiOutlineClose size={20}/>} >Products</Link></li>              
-              <li className='p-4 border-b border-gray-600'><Link to="/company" onClick={<AiOutlineClose size={20}/>} >Company</Link></li>
-              <li className='p-4 border-b border-gray-600'><Link to="/contact" onClick={<AiOutlineClose size={20}/>} >Contact</Link></li>
+              <li className='p-4 border-b border-gray-600'><Link to="/" onClick={<AiOutlineClose size={20}/>} >Início</Link></li>
+              <li className='p-4 border-b border-gray-600'><Link to="/projects" onClick={<AiOutlineClose size={20}/>} >Movimentações</Link></li>
+              <li className='p-4 border-b border-gray-600'><Link to="/products" onClick={<AiOutlineClose size={20}/>} >Produtos</Link></li>              
+
+              {tipoFront == 'lavoura' && 
+              <li className='p-4 border-b border-gray-600'><Link to="/company" onClick={<AiOutlineClose size={20}/>} >Listagem</Link></li>
+              }
+              
+              {/*<li className='p-4 border-b border-gray-600'><Link to="/contact" onClick={<AiOutlineClose size={20}/>} >Contato</Link></li>*/}
               {token &&                        
-                <li className='p-4'><Link onClick={handleLogout} to="/"> Logout</Link></li>
+                <li className='p-4'><Link onClick={handleLogout} to="/"> Sair</Link></li>
               }
           </ul>
     </div>       

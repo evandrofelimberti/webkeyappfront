@@ -12,6 +12,11 @@ function ProjectForm({handleSubmit, btnText, projectData}){
     const [Safra, setSafra] = useState([])
     const [MovimentoLavoura, setMovimentoLavoura] = useState({})
     const [Movimento, setMovimento] = useState(projectData || {})
+    const tipoFront = localStorage.getItem('tipoSistema');      
+
+    function sistemaFrontLavoura(){
+        return tipoFront == 'lavoura'
+    }    
      
     useEffect(()=>{
         if(projectData){
@@ -128,7 +133,8 @@ function ProjectForm({handleSubmit, btnText, projectData}){
             options={TipoMovimento} 
             handleOnChange={handleTipoMovimento}
             value={Movimento.TipoMovimento ? Movimento.TipoMovimento.Id : ''}
-        />
+        />        
+        {sistemaFrontLavoura() ? ( <>
         <Select 
             name="LavouraId" 
             text="Selecione a Lavoura" 
@@ -142,7 +148,7 @@ function ProjectForm({handleSubmit, btnText, projectData}){
             options={Safra} 
             handleOnChange={handleMovimentoLavouraSafra}
             value={MovimentoLavoura ? MovimentoLavoura.SafraId : ''}
-    />        
+        />        
         <Input 
             type="text" 
             text="Observações"
@@ -159,7 +165,8 @@ function ProjectForm({handleSubmit, btnText, projectData}){
             format="yyyy-mm-dd"
             handleOnChange={handleCamposMovimentoLavoura}
             value={MovimentoLavoura.DataRealizado ? MovimentoLavoura.DataRealizado : ''}
-        />          
+        />   
+        </> ):(<></>)}         
            
         <SubmitButton text={btnText}/>
          

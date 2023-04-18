@@ -7,6 +7,7 @@ import Select from "./Select";
 import Message from "../layout/Message";
 
 
+
 const ProdutoForm = ({novoProduto}) => {  
   const { id } = useParams();
 
@@ -176,6 +177,8 @@ const validarProduto = () =>{
   };
 
   const deleteProduto = () => {
+
+    { window.confirm( 'Deseja deletar o produto?', ) &&
     ProductService.remove(recuperarProduto.Id)
       .then(response => {
         console.log(response.data);
@@ -185,7 +188,8 @@ const validarProduto = () =>{
       .catch(e => {
         setMessage(e.response.data);
         console.log(e);
-      });
+      });     
+    }
   };  
 
   return (

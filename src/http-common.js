@@ -7,8 +7,12 @@ const customAxios = axios.create({
 });
 
 const tokenString = localStorage.getItem('token');
-const userToken = JSON.parse(tokenString);
-const token = `Bearer ${userToken?.token}`;
+var token = '';
+
+if(tokenString != ''){
+    const userToken = JSON.parse(tokenString);
+    token = `Bearer ${userToken?.token}`;
+}
 
 const requestHandler = request => {
     request.headers.Authorization = token;

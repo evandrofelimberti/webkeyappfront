@@ -6,7 +6,10 @@ import { useState, useEffect} from 'react'
 function Home(){
     const [nomeTitulo, setNomeTitulo] = useState("Costs")    
     const [descricaoTitulo, setDescricaoTitulo] = useState("Comece a gerenciar sua Lavoura agora mesmo!")        
-    var tipoFront = "lavoura";
+    //var tipoFront = "lavoura";
+    //var tipoFront = "estoque";
+    localStorage.setItem('tipoSistema', 'estoque');   
+    var tipoFront = localStorage.getItem('tipoSistema'); 
     useEffect(()=>{
         if(tipoFront==="estoque"){
             setNomeTitulo("Costs");
