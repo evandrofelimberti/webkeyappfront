@@ -29,6 +29,7 @@ function InputNumeric({text, name, placeholder, handleOnChange, value}){
             placeholder={placeholder}
             onChange={(event) => checkValue(event, 'change')}
             value={currentValue}
+            autocomplete="off"
             />
             
         </div>

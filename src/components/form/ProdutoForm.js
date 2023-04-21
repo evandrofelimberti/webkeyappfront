@@ -5,6 +5,7 @@ import Input from "./Input";
 import styles from './ProdutoForm.module.css';
 import Select from "./Select";
 import Message from "../layout/Message";
+import InputNumeric from "./InputNumeric";
 
 
 
@@ -18,7 +19,7 @@ const ProdutoForm = ({novoProduto}) => {
     UnidadeId: null,
     Unidade: null,
     TipoProdutoId: null,
-    TipoProduto: null
+    TipoProduto: null,
   };
 
   const [recuperarProduto, setRecuperarProduto] = useState(initialProdutoState);
@@ -120,7 +121,7 @@ const ProdutoForm = ({novoProduto}) => {
       UnidadeId: recuperarProduto.UnidadeId,
       Unidade: recuperarProduto.Unidade,
       TipoProdutoId: recuperarProduto.TipoProdutoId,
-      TipoProduto:recuperarProduto.TipoProduto     
+      TipoProduto:recuperarProduto.TipoProduto,     
     };
 
     ProductService.create(data)
@@ -133,7 +134,7 @@ const ProdutoForm = ({novoProduto}) => {
           UnidadeId: response.data.UnidadeId,
           Unidade: response.data.Unidade,
           TipoProdutoId: response.data.TipoProdutoId,
-          TipoProduto: response.data.TipoProduto
+          TipoProduto: response.data.TipoProduto,
         });
         setSubmitted(true);
         console.log(response.data);
@@ -230,7 +231,7 @@ const validarProduto = () =>{
                  placeholder="Digite a Descrição do produto "
                  handleOnChange={handleInputChange}
                  value={recuperarProduto.Descricao ? recuperarProduto.Descricao: ''}
-             />            
+             />                           
             <Select 
                 name="UnidadeId" 
                 text="Unidade" 

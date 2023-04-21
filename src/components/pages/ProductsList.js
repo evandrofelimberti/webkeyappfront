@@ -10,6 +10,9 @@ import Input from '../form/Input'
 import LinkButton from "../layout/LinkButton";
 import Container from "../layout/Container";
 import Message from '../layout/Message'
+import { numberFormat } from "../form/numberFormat";
+import { NumberFormat } from "@formatjs/intl-numberformat";
+import InputNumeric from "../form/InputNumeric";
 
 const ProductsList = (props) => {
     const [produtos, setProdutos] = useState([]);
@@ -112,10 +115,14 @@ const ProductsList = (props) => {
           },
           {
             Header: "Saldo",
-            accessor: "Saldo",
+            accessor: "ProdutoSaldo.ValorSaldo",
             maxWidth: 150,
             minWidth:100,
             width:110,
+            type: "number",
+            thousandSeparator:true,
+            decimalScale:2,
+            fixedDecimalScale:true,            
           },
           {
             Header: "Unidade",
@@ -142,27 +149,11 @@ const ProductsList = (props) => {
               const rowIdx = props.cell.row.original['Id'];
               return (
                 <div >
-
                 <Link className={styles.button} to={`/product/${rowIdx}`}> 
                     <BsPencil /> Editar
                 </Link>
-
                 <button className={styles.button}  onClick ={() => {
-
                   deleteProduto(rowIdx)
-
-                 /* ProductService.remove(rowIdx)
-                  .then((response) => {
-                    setMessage('Produto Removido!');
-                    setType('success');                 
-                    window.location.href = '/products';         
-                      //<Link to={`/products`}> </Link>            
-                  })
-                  .catch((e) => {
-                    setMessage("Erro ao deletar o produto Id " + rowIdx + "\n" + e.response.data)
-                    setType('error')                    
-                    console.log(e);
-                  });*/
                     }}> <BsFillTrashFill /> Excluir </button>
                   </div>                               
                   );
@@ -218,8 +209,9 @@ const ProductsList = (props) => {
                     {headerGroup.headers.map((column) => (
                       <th {...column.getHeaderProps({style:{
                         minWidth: column.minWidth,
-                        maxWidth: column.maxWidth,
-                        width:column.width}})}>
+                        maxWidth: column.maxWidth,                        
+                        width:column.width,
+                        }})}>
                        <span>{column.render("Header")}</span> 
                       </th>
                     ))}
@@ -235,7 +227,9 @@ const ProductsList = (props) => {
                         return (
                           <td {...cell.getCellProps({
                             style:{minWidth: cell.column.minWidth,
-                            width:cell.column.width}
+                            width:cell.column.width,
+                            type: cell.column.type ,
+                          }
                           })}
                           >
                             {cell.render("Cell")}
