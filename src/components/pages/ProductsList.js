@@ -10,9 +10,7 @@ import Input from '../form/Input'
 import LinkButton from "../layout/LinkButton";
 import Container from "../layout/Container";
 import Message from '../layout/Message'
-import { numberFormat } from "../form/numberFormat";
-import { NumberFormat } from "@formatjs/intl-numberformat";
-import InputNumeric from "../form/InputNumeric";
+import { numberFormat } from '../form/numberFormat';
 
 const ProductsList = (props) => {
     const [produtos, setProdutos] = useState([]);
@@ -114,31 +112,55 @@ const ProductsList = (props) => {
             width:350,
           },
           {
-            Header: "Saldo",
-            accessor: "ProdutoSaldo.ValorSaldo",
-            maxWidth: 150,
-            minWidth:100,
-            width:110,
-            type: "number",
-            thousandSeparator:true,
-            decimalScale:2,
-            fixedDecimalScale:true,            
-          },
-          {
             Header: "Unidade",
             accessor: "Unidade.Descricao",
             maxWidth: 110,
             minWidth:100,
             width:100,
             
+          },            
+          {
+            Header: "Saldo",
+            accessor: "ProdutoSaldo.ValorSaldo",
+            maxWidth: 150,
+            minWidth:100,
+            width:110,
+            Cell: props =>{
+              return(
+              <>
+                {new Intl.NumberFormat('pt-BR', { currency: 'BRL', minimumFractionDigits: 2  }).format(props.value)} 
+              </>
+              )
+            }           
+          },
+          {
+            Header: "Preço Venda",
+            accessor: "ProdutoSaldo.ValorVenda",
+            maxWidth: 150,
+            minWidth:100,
+            width:110,
+            Cell: props =>{
+              return(
+              <> 
+              {numberFormat(props.value)}
+              </>
+              )
+            }           
           },          
           {
-            Header: "Tipo Produto",
-            accessor: "TipoProduto.Descricao",
-            maxWidth: 180,
-            minWidth:150,
-            width:180,
-          },
+            Header: "Custo Compra",
+            accessor: "ProdutoSaldo.ValorCompra",
+            maxWidth: 150,
+            minWidth:100,
+            width:110,
+            Cell: props =>{
+              return(
+              <>
+                {new Intl.NumberFormat('pt-BR', { currency: 'BRL', minimumFractionDigits: 2  }).format(props.value)} 
+              </>
+              )
+            }           
+          },                             
           {
             Header: "Ação",
             accessor: "actions",
@@ -211,6 +233,7 @@ const ProductsList = (props) => {
                         minWidth: column.minWidth,
                         maxWidth: column.maxWidth,                        
                         width:column.width,
+                        fontSize:17
                         }})}>
                        <span>{column.render("Header")}</span> 
                       </th>
@@ -228,7 +251,8 @@ const ProductsList = (props) => {
                           <td {...cell.getCellProps({
                             style:{minWidth: cell.column.minWidth,
                             width:cell.column.width,
-                            type: cell.column.type ,
+                            type: cell.column.type,
+                            fontSize: 17,
                           }
                           })}
                           >

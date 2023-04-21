@@ -20,6 +20,8 @@ const ProdutoForm = ({novoProduto}) => {
     Unidade: null,
     TipoProdutoId: null,
     TipoProduto: null,
+    ValorVenda: null,
+    ProdutoSaldo: null,
   };
 
   const [recuperarProduto, setRecuperarProduto] = useState(initialProdutoState);
@@ -29,12 +31,14 @@ const ProdutoForm = ({novoProduto}) => {
   const [message, setMessage] = useState("");  
   const [pendenciaProduto, setPendenciaProduto] = useState(false);
   const [type, setType] = useState()  
+  const [valorVenda, setValorVenda] = useState('');  
   
 
   const getProduto = Id => {
     ProductService.get(Id)
       .then(response => {
         setRecuperarProduto(response.data);
+        setValorVenda(response.data.ProdutoSaldo.ValorVenda); 
         console.log(response.data);
       })
       .catch(e => {
@@ -83,6 +87,14 @@ const ProdutoForm = ({novoProduto}) => {
     setPendenciaProduto(false);   
   };
 
+  const handleInputChangeValorVenda = event => {
+    const {value } = event.target;
+    setValorVenda(value);
+    setRecuperarProduto({ ...recuperarProduto, ValorVenda: value});
+    setMessage(""); 
+    setPendenciaProduto(false);   
+  };  
+
   const handleInputChangeSelectUnidade = (event) => {
     const { name, value } = event.target;
     setRecuperarProduto({ ...recuperarProduto, [name]: value,
@@ -121,7 +133,9 @@ const ProdutoForm = ({novoProduto}) => {
       UnidadeId: recuperarProduto.UnidadeId,
       Unidade: recuperarProduto.Unidade,
       TipoProdutoId: recuperarProduto.TipoProdutoId,
-      TipoProduto:recuperarProduto.TipoProduto,     
+      TipoProduto: recuperarProduto.TipoProduto,
+      ValorVenda: recuperarProduto.ProdutoSaldo.ValorVenda,  
+      ProdutoSaldo: recuperarProduto.ProdutoSaldo,   
     };
 
     ProductService.create(data)
@@ -135,6 +149,8 @@ const ProdutoForm = ({novoProduto}) => {
           Unidade: response.data.Unidade,
           TipoProdutoId: response.data.TipoProdutoId,
           TipoProduto: response.data.TipoProduto,
+          ValorVenda: response.data.ProdutoSaldo.ValorVenda,
+          ProdutoSaldo: response.data.ProdutoSaldo,
         });
         setSubmitted(true);
         console.log(response.data);
@@ -231,21 +247,28 @@ const validarProduto = () =>{
                  placeholder="Digite a Descrição do produto "
                  handleOnChange={handleInputChange}
                  value={recuperarProduto.Descricao ? recuperarProduto.Descricao: ''}
-             />                           
-            <Select 
-                name="UnidadeId" 
-                text="Unidade" 
-                options={recuperarUnidade} 
-                handleOnChange={handleInputChangeSelectUnidade}
-                value={recuperarProduto.Unidade ? recuperarProduto.UnidadeId : ''}
-            />
-            <Select 
-                name="TipoProdutoId" 
-                text="Tipo Produto" 
-                options={recuperarTipoProduto} 
-                handleOnChange={handleInputChangeSelectTipoProduto}
-                value={recuperarProduto.TipoProduto ? recuperarProduto.TipoProdutoId : ''}
-            />             
+             />                                          
+            <InputNumeric
+                text="Preço Venda"
+                name="ValorVenda"
+                placeholder={"Insira o Preço para Venda"}
+                handleOnChange={handleInputChangeValorVenda}
+                value={valorVenda ? valorVenda: ''}
+              />
+              <Select 
+                  name="UnidadeId" 
+                  text="Unidade" 
+                  options={recuperarUnidade} 
+                  handleOnChange={handleInputChangeSelectUnidade}
+                  value={recuperarProduto.Unidade ? recuperarProduto.UnidadeId : ''}
+              />
+              <Select 
+                  name="TipoProdutoId" 
+                  text="Tipo Produto" 
+                  options={recuperarTipoProduto} 
+                  handleOnChange={handleInputChangeSelectTipoProduto}
+                  value={recuperarProduto.TipoProduto ? recuperarProduto.TipoProdutoId : ''}
+              />             
        </div>      
           {novoProduto ? (
             <button onClick={saveProduto} className={styles.btn}>

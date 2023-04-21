@@ -2,10 +2,10 @@ import React from 'react'
 import styles from './Input.module.css'
 import { useState } from "react";
 
+
 function InputNumeric({text, name, placeholder, handleOnChange, value}){
       
-
-    const [currentValue, setCurrentValue] = useState(undefined);
+    const [currentValue, setCurrentValue] = useState();
   
     function checkValue(event) {
         setCurrentValue(handleDecimalsOnValue(event.target.value))
@@ -28,9 +28,10 @@ function InputNumeric({text, name, placeholder, handleOnChange, value}){
             id={name}
             placeholder={placeholder}
             onChange={(event) => checkValue(event, 'change')}
-            value={currentValue}
-            autocomplete="off"
-            />
+            value={currentValue?currentValue:value}
+            autocomplete="off"         
+            />          
+
             
         </div>
     )
