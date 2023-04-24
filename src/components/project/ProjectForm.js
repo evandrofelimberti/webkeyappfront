@@ -4,6 +4,7 @@ import Input from '../form/Input'
 import Select from '../form/Select'
 import SubmitButton from '../form/SubmitButton'
 import styles from './ProjectForm.module.css'
+import Message from '../layout/Message'
 
 function ProjectForm({handleSubmit, btnText, projectData}){
 
@@ -13,6 +14,8 @@ function ProjectForm({handleSubmit, btnText, projectData}){
     const [MovimentoLavoura, setMovimentoLavoura] = useState({})
     const [Movimento, setMovimento] = useState(projectData || {})
     const tipoFront = localStorage.getItem('tipoSistema');      
+    const [message, setMessage] = useState("");      
+    const [type, setType] = useState()      
 
     function sistemaFrontLavoura(){
         return tipoFront == 'lavoura'
@@ -58,12 +61,19 @@ function ProjectForm({handleSubmit, btnText, projectData}){
     }, [])      
 
     const submit = (e) => {
-        e.preventDefault()
-        console.log('submit projectform')
-        console.log(Movimento)   
-        Movimento.MovimentoLavoura = MovimentoLavoura
-        handleSubmit(Movimento)
-
+        var possuiPendencia = false;
+        if((Movimento.TipoMovimento == null) || (Movimento.TipoMovimento.Descricao == "Selecione uma opção")){
+            setMessage("Tipo movimento não informado!");
+            setType("error");
+            possuiPendencia = true;  
+          }          
+        if (!possuiPendencia){
+            e.preventDefault()
+            console.log('submit projectform')
+            console.log(Movimento)   
+            Movimento.MovimentoLavoura = MovimentoLavoura
+            handleSubmit(Movimento)  
+         } 
     }
 
     function handleChange(e){
@@ -111,6 +121,7 @@ function ProjectForm({handleSubmit, btnText, projectData}){
 
     return(
     <form onSubmit={submit} className={styles.form}>
+      {message && <Message type={type} msg={message} /> }           
         <Input 
             type="text" 
             text="Descrição"

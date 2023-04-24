@@ -134,8 +134,7 @@ const ProdutoForm = ({novoProduto}) => {
       Unidade: recuperarProduto.Unidade,
       TipoProdutoId: recuperarProduto.TipoProdutoId,
       TipoProduto: recuperarProduto.TipoProduto,
-      ValorVenda: recuperarProduto.ProdutoSaldo.ValorVenda,  
-      ProdutoSaldo: recuperarProduto.ProdutoSaldo,   
+      ValorVenda: recuperarProduto.ValorVenda,  
     };
 
     ProductService.create(data)
@@ -166,12 +165,12 @@ const ProdutoForm = ({novoProduto}) => {
   };  
 
 const validarProduto = () =>{
-  if(recuperarProduto.TipoProdutoId === "Selecione uma opção"){
+  if((recuperarProduto.TipoProduto == null) || (recuperarProduto.TipoProdutoId === "Selecione uma opção")){
     setMessage("Tipo produto não informado!");
     setType("error");
     setPendenciaProduto(true);
   }
-  if(recuperarProduto.UnidadeId === "Selecione uma opção"){
+  if((recuperarProduto.Unidade == null) || (recuperarProduto.UnidadeId === "Selecione uma opção")){
     setMessage("Unidade não informada!");
     setType("error");
     setPendenciaProduto(true);

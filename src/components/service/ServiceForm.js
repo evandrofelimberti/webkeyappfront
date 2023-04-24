@@ -8,7 +8,7 @@ import UseToken from '../layout/UseToken'
 
 function ServiceForm({handleSubmit, btnText, projectData}){
     const [Itens, SetItens] = useState([])
-    const [Produto, setProduto]= useState([])      
+    const [Produto, setProduto]= useState([])          
     const { token} = UseToken();
 
       useEffect(()=>{
@@ -19,7 +19,10 @@ function ServiceForm({handleSubmit, btnText, projectData}){
         },
        })
        .then((resp) => resp.json())
-       .then((data) => {setProduto(data); console.log(data); })
+       .then((data) => {
+        setProduto(data); 
+        console.log(data); 
+        })
        .catch((err) => console.log(err))        
         }, [])
 
@@ -35,18 +38,23 @@ function ServiceForm({handleSubmit, btnText, projectData}){
     }
   
   function handleProduto(e){
+  var ValorVenda = ''
+  if(projectData.TipoMovimento.Tipo == '2'){ // 2 = venda
+    ValorVenda =  Produto.find(p => p.Id == e.target.value).ProdutoSaldo.ValorVenda;
+  }
     SetItens({...Itens,
             Descricao: e.target.options[e.target.selectedIndex].text,
             ProdutoId: e.target.value,
             Produto:{
               Id: e.target.value,
               Descricao: e.target.options[e.target.selectedIndex].text,
-            }
+            },
+            Valor: ValorVenda,
           })
   }
 
     return(
-        <form onSubmit={submit} className={styles.form}>
+        <form onSubmit={submit} className={styles.form}>          
           <Select 
               name="ProdutoId" 
               text="Selecione o Produto" 
@@ -73,6 +81,7 @@ function ServiceForm({handleSubmit, btnText, projectData}){
               name="Valor"
               placeholder={"Insira o Valor"}
               handleOnChange={handleChange}
+              value={Itens.Valor? Itens.Valor : ''}
             />              
             <SubmitButton text={btnText}/>      
 
