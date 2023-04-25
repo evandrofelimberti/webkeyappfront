@@ -8,6 +8,7 @@ import styles from './Projects.module.css'
 import ProjectCard from '../project/ProjectCard'
 import { useState, useEffect} from 'react'
 import userEvent from '@testing-library/user-event'
+import { Link } from 'react-router-dom'
 
 function Projects(){
     const [movimento, setMovimentos] = useState([]);
@@ -20,33 +21,56 @@ function Projects(){
         message = location.state.message
     }
 
-    useEffect(() => {
+    const recuperarMovimentos = () => {
         setTimeout(
-           async () => {
-             await fetch("http://localhost:5028/api/movimento",{
-                    method:"GET" ,     
-                    mode:"cors",                                  
-                    headers:{
-                        'Accept': 'application/json;', 
-                        'Content-Type': 'application/json; charset=utf-8'                    
-                  },                  
-                  credentials:'same-origin'
+            async () => {
+              await fetch("http://localhost:5028/api/movimento",{
+                     method:"GET" ,     
+                     mode:"cors",                                  
+                     headers:{
+                         'Accept': 'application/json;', 
+                         'Content-Type': 'application/json; charset=utf-8'                    
+                   },                  
+                   credentials:'same-origin'
+                  })
+                  .then((resp) => resp.json())
+                  .then((data) => {                    
+                     console.log(data)
+                     setMovimentos(data)
+                     setRemoveLoading(true)
                  })
-                 .then((resp) => resp.json())
-                 .then((data) => {                    
-                    console.log(data)
-                    setMovimentos(data)
-                    setRemoveLoading(true)
-                })
-                 .catch((err) => console.log(err)) 
-            }, 1000)
+                  .catch((err) => console.log(err)) 
+             }, 1000)
+      }; 
 
+      const recuperarMovimentosFiltro = () => {
+        setTimeout(
+            async () => {
+              await fetch(`http://localhost:5028/api/movimento/Filtro?descricao=${searchName}`  ,{
+                     method:"GET" ,     
+                     mode:"cors",                                  
+                     headers:{
+                         'Accept': 'application/json;', 
+                         'Content-Type': 'application/json; charset=utf-8'                    
+                   },                  
+                   credentials:'same-origin'
+                  })
+                  .then((resp) => resp.json())
+                  .then((data) => {                    
+                     console.log(data)
+                     setMovimentos(data)
+                     setRemoveLoading(true)
+                 })
+                  .catch((err) => console.log(err)) 
+             }, 1000)
+      };  
+
+
+    useEffect(() => {
+        recuperarMovimentos();
     }, []) 
    
-   
-
-    function removeProject(id){
-
+       function removeProject(id){
         { window.confirm( 'Deseja deletar o Movimento?', ) &&         
         fetch(`http://localhost:5028/api/movimento/${id}`,{
             method:'DELETE',
@@ -65,11 +89,44 @@ function Projects(){
     }
     }
 
+    const [searchName, setSearchName] = useState("");    
+
+    const onChangeSearchName = (e) => {
+        const searchName = e.target.value;
+        setSearchName(searchName);
+      };
+
+    const findByName = () => {
+    if (searchName !== ''){
+        recuperarMovimentosFiltro();
+    } else {
+        recuperarMovimentos();
+    }};    
+
     return (
         <div className={styles.project_container}>
             <div className={styles.title_container}>
-                <h1>Listagem de movimentações</h1>
-                <LinkButton to="/newproject" text="Criar movimento"/>
+
+          
+                        <input className={styles.input}
+                            type="text"
+                            placeholder="Pesquisar pelo Descrição"
+                            value={searchName}
+                            onChange={onChangeSearchName}
+                        />
+                        <div >
+                        <button className={styles.buttonPesquisa}
+                            type="button"
+                            onClick={findByName}
+                        > Pesquisar
+                        </button>
+
+
+                        </div>
+                  
+
+               {/* <LinkButton className={styles.btnlink} to="/newproject" text="Criar movimento"/>*/}
+                <Link className={styles.btnLink} to="/newproject"> Criar movimento</Link>  
             </div> 
             {message && <Message type="success" msg={message} />}
             {projectMessage && <Message type="success" msg={projectMessage} />}
