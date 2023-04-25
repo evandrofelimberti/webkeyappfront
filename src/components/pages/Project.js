@@ -8,6 +8,7 @@ import ServiceForm from '../service/ServiceForm'
 import Message from '../layout/Message'
 import ServiceCad from '../service/ServiceCad'
 import { numberFormat } from '../form/numberFormat';
+import UseToken from '../layout/UseToken'
 
 
 function Project(){
@@ -18,7 +19,8 @@ function Project(){
     const [message, setMessage] = useState()
     const [type, setType] = useState()
     const [Itens, setItens] = useState([])
-    const tipoFront = localStorage.getItem('tipoSistema');      
+    const tipoFront = localStorage.getItem('tipoSistema');   
+    const { token} = UseToken();   
 
     function sistemaFrontLavoura(){
         return tipoFront == 'lavoura'
@@ -30,6 +32,7 @@ function Project(){
                 fetch(`http://localhost:5028/api/movimento/${id}`,{
                     method:"GET" ,
                     headers:{'Content-Type': 'application/json',
+                    "Authorization": `Bearer ${token}`,   
                   },
                  })
                  .then((resp) => resp.json())
@@ -92,6 +95,7 @@ function Project(){
         fetch(`http://localhost:5028/api/movimento/${movimento.Id}`,{
             method:"PUT" ,
             headers:{'Content-Type': 'application/json',
+            "Authorization": `Bearer ${token}`,   
           },
           body:JSON.stringify(movimento),
          })
@@ -126,6 +130,7 @@ function Project(){
         fetch(`http://localhost:5028/api/movimentoitem/${id}`,{
             method:'DELETE',
             headers:{'Content-Type': 'application/json',
+            "Authorization": `Bearer ${token}`,   
             },
             body:JSON.stringify(MovimentoUpdated),            
         }).then(resp => resp.json())
@@ -162,6 +167,7 @@ function Project(){
         fetch(`http://localhost:5028/api/movimento/${project.Id}`,{
             method:"PUT" ,
             headers:{'Content-Type': 'application/json',
+            "Authorization": `Bearer ${token}`,   
           },
           body:JSON.stringify(project),
          })

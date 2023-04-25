@@ -1,19 +1,19 @@
 import { useLocation } from 'react-router-dom'
 import Message from '../layout/Message'
 import Container from '../layout/Container'
-import LinkButton from '../layout/LinkButton'
 import Loading from '../layout/Loading'
 
 import styles from './Projects.module.css'
 import ProjectCard from '../project/ProjectCard'
 import { useState, useEffect} from 'react'
-import userEvent from '@testing-library/user-event'
 import { Link } from 'react-router-dom'
+import UseToken from '../layout/UseToken'
 
 function Projects(){
     const [movimento, setMovimentos] = useState([]);
     const [removeLoading, setRemoveLoading] = useState(false);
     const [projectMessage, setProjectMessage] = useState('')
+    const { token} = UseToken();
 
     const location = useLocation()
     let message = ''
@@ -29,7 +29,8 @@ function Projects(){
                      mode:"cors",                                  
                      headers:{
                          'Accept': 'application/json;', 
-                         'Content-Type': 'application/json; charset=utf-8'                    
+                         'Content-Type': 'application/json; charset=utf-8',
+                         "Authorization": `Bearer ${token}`,          
                    },                  
                    credentials:'same-origin'
                   })
@@ -51,7 +52,8 @@ function Projects(){
                      mode:"cors",                                  
                      headers:{
                          'Accept': 'application/json;', 
-                         'Content-Type': 'application/json; charset=utf-8'                    
+                         'Content-Type': 'application/json; charset=utf-8',
+                         "Authorization": `Bearer ${token}`,                    
                    },                  
                    credentials:'same-origin'
                   })
@@ -75,6 +77,7 @@ function Projects(){
         fetch(`http://localhost:5028/api/movimento/${id}`,{
             method:'DELETE',
             headers:{'Content-Type': 'application/json',
+            "Authorization": `Bearer ${token}`,
             },            
         }).then(resp => {
             resp.json(); 
@@ -106,6 +109,8 @@ function Projects(){
     return (
         <div className={styles.project_container}>
             <div className={styles.title_container}>
+            {message && <Message type="success" msg={message} />}
+            {projectMessage && <Message type="success" msg={projectMessage} />}
 
           
                         <input className={styles.input}
@@ -128,8 +133,6 @@ function Projects(){
                {/* <LinkButton className={styles.btnlink} to="/newproject" text="Criar movimento"/>*/}
                 <Link className={styles.btnLink} to="/newproject"> Criar movimento</Link>  
             </div> 
-            {message && <Message type="success" msg={message} />}
-            {projectMessage && <Message type="success" msg={projectMessage} />}
             <Container customClass="start">
                 
                 {movimento.length > 0 && 

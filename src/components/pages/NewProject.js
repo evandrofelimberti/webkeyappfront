@@ -2,9 +2,11 @@ import { useNavigate } from "react-router-dom";
 
 import ProjectForm from '../project/ProjectForm'
 import styles from './NewProject.module.css'
+import UseToken from '../layout/UseToken'
 
 function NewProject(){
     const navigate = useNavigate()
+    const { token} = UseToken();  
 
     function createPost(movimento){
         //movimento.cost = 0
@@ -13,6 +15,7 @@ function NewProject(){
         fetch('http://localhost:5028/api/movimento',{
            method: 'POST' ,
            headers:{'Content-Type': 'application/json',
+           "Authorization": `Bearer ${token}`, 
         },
         body: JSON.stringify(movimento)
        })
