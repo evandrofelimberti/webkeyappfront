@@ -122,6 +122,13 @@ function ProjectForm({handleSubmit, btnText, projectData}){
     return(
     <form onSubmit={submit} className={styles.form}>
       {message && <Message type={type} msg={message} /> }           
+      <Select 
+            name="TipoMovimentoId" 
+            text="Selecione o Tipo" 
+            options={TipoMovimento} 
+            handleOnChange={handleTipoMovimento}
+            value={Movimento.TipoMovimento ? Movimento.TipoMovimento.Id : ''}
+        />       
         <Input 
             type="text" 
             text="Descrição"
@@ -137,14 +144,7 @@ function ProjectForm({handleSubmit, btnText, projectData}){
             placeholder="Insira o número identificador"
             handleOnChange={handleChange}
             value={Movimento.Numero ? Movimento.Numero: ''}
-        />            
-        <Select 
-            name="TipoMovimentoId" 
-            text="Selecione o Tipo" 
-            options={TipoMovimento} 
-            handleOnChange={handleTipoMovimento}
-            value={Movimento.TipoMovimento ? Movimento.TipoMovimento.Id : ''}
-        />        
+        />                   
         {sistemaFrontLavoura() ? ( <>
         <Select 
             name="LavouraId" 
