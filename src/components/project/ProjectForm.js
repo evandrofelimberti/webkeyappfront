@@ -28,7 +28,7 @@ function ProjectForm({handleSubmit, btnText, projectData}){
     }}},[])
 
     useEffect(()=>{
-        fetch("http://localhost:5028/api/TipoMovimento",{
+        fetch(process.env.REACT_APP_URL_API_WEB_APP_KEY +`/TipoMovimento`,{
             method:"GET" ,
             headers:{'Content-Type': 'application/json',
           },
@@ -39,7 +39,7 @@ function ProjectForm({handleSubmit, btnText, projectData}){
     }, [])
 
     useEffect(()=>{
-        fetch("http://localhost:5028/api/Lavoura",{
+        fetch(process.env.REACT_APP_URL_API_WEB_APP_KEY +`Lavoura`,{
             method:"GET" ,
             headers:{'Content-Type': 'application/json',
           },
@@ -50,7 +50,7 @@ function ProjectForm({handleSubmit, btnText, projectData}){
     }, [])    
 
     useEffect(()=>{
-        fetch("http://localhost:5028/api/Safra",{
+        fetch(process.env.REACT_APP_URL_API_WEB_APP_KEY +`/Safra`,{
             method:"GET" ,
             headers:{'Content-Type': 'application/json',
           },

@@ -24,7 +24,7 @@ function Projects(){
     const recuperarMovimentos = () => {
         setTimeout(
             async () => {
-              await fetch("http://localhost:5028/api/movimento",{
+              await fetch(process.env.REACT_APP_URL_API_WEB_APP_KEY +`/movimento`,{
                      method:"GET" ,     
                      mode:"cors",                                  
                      headers:{
@@ -47,7 +47,7 @@ function Projects(){
       const recuperarMovimentosFiltro = () => {
         setTimeout(
             async () => {
-              await fetch(`http://localhost:5028/api/movimento/Filtro?descricao=${searchName}`  ,{
+              await fetch(process.env.REACT_APP_URL_API_WEB_APP_KEY +`/movimento/Filtro?descricao=${searchName}`  ,{
                      method:"GET" ,     
                      mode:"cors",                                  
                      headers:{
@@ -74,7 +74,7 @@ function Projects(){
    
        function removeProject(id){
         { window.confirm( 'Deseja deletar o Movimento?', ) &&         
-        fetch(`http://localhost:5028/api/movimento/${id}`,{
+        fetch(process.env.REACT_APP_URL_API_WEB_APP_KEY +`/movimento/${id}`,{
             method:'DELETE',
             headers:{'Content-Type': 'application/json',
             "Authorization": `Bearer ${token}`,

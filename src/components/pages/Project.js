@@ -29,7 +29,7 @@ function Project(){
     useEffect(() => {
         setTimeout(
             () => {
-                fetch(`http://localhost:5028/api/movimento/${id}`,{
+                fetch(process.env.REACT_APP_URL_API_WEB_APP_KEY +`/movimento/${id}`,{
                     method:"GET" ,
                     headers:{'Content-Type': 'application/json',
                     "Authorization": `Bearer ${token}`,   
@@ -92,7 +92,7 @@ function Project(){
         //update project
         setMessage('')
 
-        fetch(`http://localhost:5028/api/movimento/${movimento.Id}`,{
+        fetch(process.env.REACT_APP_URL_API_WEB_APP_KEY +`/movimento/${movimento.Id}`,{
             method:"PUT" ,
             headers:{'Content-Type': 'application/json',
             "Authorization": `Bearer ${token}`,   
@@ -127,7 +127,7 @@ function Project(){
             MovimentoUpdated.MovimentoLavoura = {};
         }
 
-        fetch(`http://localhost:5028/api/movimentoitem/${id}`,{
+        fetch(process.env.REACT_APP_URL_API_WEB_APP_KEY +`/movimentoitem/${id}`,{
             method:'DELETE',
             headers:{'Content-Type': 'application/json',
             "Authorization": `Bearer ${token}`,   
@@ -164,7 +164,7 @@ function Project(){
             return false
         }*/
 
-        fetch(`http://localhost:5028/api/movimento/${project.Id}`,{
+        fetch(process.env.REACT_APP_URL_API_WEB_APP_KEY +`/movimento/${project.Id}`,{
             method:"PUT" ,
             headers:{'Content-Type': 'application/json',
             "Authorization": `Bearer ${token}`,   

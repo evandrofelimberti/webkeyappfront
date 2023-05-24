@@ -12,7 +12,7 @@ function ServiceForm({handleSubmit, btnText, projectData}){
     const { token} = UseToken();
 
       useEffect(()=>{
-      fetch("http://localhost:5028/api/Produto",{
+      fetch(process.env.REACT_APP_URL_API_WEB_APP_KEY +`/Produto`,{
           method:"GET" ,
           headers:{'Content-Type': 'application/json',
           "Authorization": `Bearer ${token}`,

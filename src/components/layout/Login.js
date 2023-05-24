@@ -6,7 +6,7 @@ import savings from '../../img/savings.svg'
 
 
 async function loginUser(credentials) {
-    return fetch('https://localhost:7028/api/Usuario/auth', {
+    return fetch(process.env.REACT_APP_URL_API_WEB_APP_KEY +`/Usuario/auth`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

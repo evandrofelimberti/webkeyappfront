@@ -14,7 +14,7 @@ function Company(){
     const [MovimentoLavoura, setMovimentoLavoura] = useState({})    
 
     function pesquisarMovimento(){
-              fetch(`http://localhost:5028/api/Movimento/LavouraSafra?idSafra=${MovimentoLavoura.SafraId}&idLavoura=${MovimentoLavoura.LavouraId}`,{
+              fetch(process.env.REACT_APP_URL_API_WEB_APP_KEY +`/Movimento/LavouraSafra?idSafra=${MovimentoLavoura.SafraId}&idLavoura=${MovimentoLavoura.LavouraId}`,{
                     method:"GET" ,     
                     mode:"cors",                                  
                     headers:{
@@ -34,7 +34,7 @@ function Company(){
         }
 
     useEffect(()=>{
-        fetch("http://localhost:5028/api/Lavoura",{
+        fetch(process.env.REACT_APP_URL_API_WEB_APP_KEY +`/Lavoura`,{
             method:"GET" ,
             headers:{'Content-Type': 'application/json',
           },
@@ -45,7 +45,7 @@ function Company(){
     }, [])    
 
     useEffect(()=>{
-        fetch("http://localhost:5028/api/Safra",{
+        fetch(process.env.REACT_APP_URL_API_WEB_APP_KEY +`/Safra`,{
             method:"GET" ,
             headers:{'Content-Type': 'application/json',
           },

@@ -12,7 +12,7 @@ function NewProject(){
         //movimento.cost = 0
         movimento.Itens = []
 
-        fetch('http://localhost:5028/api/movimento',{
+        fetch(process.env.REACT_APP_URL_API_WEB_APP_KEY +`/movimento`,{
            method: 'POST' ,
            headers:{'Content-Type': 'application/json',
            "Authorization": `Bearer ${token}`, 
