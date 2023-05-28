@@ -2,13 +2,8 @@ import React, { useState, useEffect, useMemo, useRef} from "react";
 import ProductService from "../../services/ProductService";
 import { useTable } from "react-table";
 import { Link } from 'react-router-dom'
-import Product from "./Product";
-import { Route , withRouter} from 'react-router-dom';
 import {BsPencil, BsFillTrashFill} from 'react-icons/bs'
 import styles from './ProductsList.module.css'
-import Input from '../form/Input'
-import LinkButton from "../layout/LinkButton";
-import Container from "../layout/Container";
 import Message from '../layout/Message'
 import { numberFormat } from '../form/numberFormat';
 
@@ -49,10 +44,6 @@ const ProductsList = (props) => {
           console.log(e);
         });
     };
-
-    const refreshList = () => {
-      recuperarProdutos();
-    };
      
     const findByName = () => {
       if (searchName !== ''){
@@ -61,12 +52,6 @@ const ProductsList = (props) => {
         recuperarProdutos();
       }
     };    
-  
-    const openProduto = (rowIndex) => {
-      const Id = produtosRef.current[rowIndex].Id;       
-      <Link to={`/product/${Id}`}> </Link>
-    //  this.props.history.push("/product/" + Id);
-    };
 
     function deleteProduto(rowIndex){
       { window.confirm( 'Deseja deletar o produto?', ) && 
@@ -197,8 +182,8 @@ const ProductsList = (props) => {
       });
     
       return (
-        <div >
-          <div className={styles.project_details}>
+        <div className={styles.project_details}>
+          <div >
             {message && <Message type={type} msg={message} /> }                        
             <div >              
               <input className={styles.input}
@@ -220,9 +205,9 @@ const ProductsList = (props) => {
               </div>
             </div>
           </div>
-          <div className="col-md-12 list">
+          <div >
             <table
-              className="table table-striped table-bordered"
+             
               {...getTableProps()}
             >
               <thead>
