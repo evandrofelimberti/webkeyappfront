@@ -79,29 +79,29 @@ const ProductsList = (props) => {
             accessor: "Codigo",
             maxWidth: 80,
             minWidth:80,
-            width: 80,
+            width: 250,
           
           },           
           {
             Header: "Nome",
             accessor: "Nome",
-            maxWidth: 400,
+            maxWidth: 450,
             minWidth:200,
             width:250,
           },         
           {
             Header: "Descrição",
             accessor: "Descricao",
-            maxWidth: 400,
-            minWidth:300,
-            width:350,
+            maxWidth: 450,
+            minWidth:200,
+            width:250,
           },
           {
             Header: "Unidade",
             accessor: "Unidade.Descricao",
             maxWidth: 110,
             minWidth:100,
-            width:100,
+            width:250,
             
           },            
           {
@@ -109,7 +109,7 @@ const ProductsList = (props) => {
             accessor: "ProdutoSaldo.ValorSaldo",
             maxWidth: 150,
             minWidth:100,
-            width:110,
+            width:250,
             Cell: props =>{
               return(
               <>
@@ -123,7 +123,7 @@ const ProductsList = (props) => {
             accessor: "ProdutoSaldo.ValorVenda",
             maxWidth: 150,
             minWidth:100,
-            width:110,
+            width:250,
             Cell: props =>{
               return(
               <> 
@@ -137,7 +137,7 @@ const ProductsList = (props) => {
             accessor: "ProdutoSaldo.ValorCompra",
             maxWidth: 150,
             minWidth:100,
-            width:110,
+            width:250,
             Cell: props =>{
               return(
               <>
@@ -183,7 +183,7 @@ const ProductsList = (props) => {
     
       return (
         <div className={styles.project_details}>
-          <div >
+          <div className={styles.details_container}>
             {message && <Message type={type} msg={message} /> }                        
             <div >              
               <input className={styles.input}
@@ -206,19 +206,21 @@ const ProductsList = (props) => {
             </div>
           </div>
           <div >
-            <table
+            <table class="table-auto min-w-full border-collapse block md:table  "
              
               {...getTableProps()}
             >
-              <thead>
+              <thead class="block md:table-header-group">
                 {headerGroups.map((headerGroup) => (
-                  <tr {...headerGroup.getHeaderGroupProps()}>
+                  <tr class="border border-grey-500 md:border-solid block md:table-row absolute -top-full md:top-auto -left-full md:left-auto  md:relative "
+                  {...headerGroup.getHeaderGroupProps()}>
                     {headerGroup.headers.map((column) => (
-                      <th {...column.getHeaderProps({style:{
+                      <th  class="bg-black-600 p-2 text-#ffbb33 font-bold md:border-solid md:border-grey-500 text-left block md:table-cell"
+                      {...column.getHeaderProps({style:{
                         minWidth: column.minWidth,
                         maxWidth: column.maxWidth,                        
                         width:column.width,
-                        fontSize:17
+                        fontSize:16
                         }})}>
                        <span>{column.render("Header")}</span> 
                       </th>
@@ -226,21 +228,26 @@ const ProductsList = (props) => {
                   </tr>
                 ))}
               </thead>
-              <tbody {...getTableBodyProps()}>
+              <tbody class="block md:table-row-group "
+              {...getTableBodyProps()}>
                 {rows.map((row, i) => {
                   prepareRow(row);
                   return (
-                    <tr {...row.getRowProps()}>
+                    <tr class="bg-#efefef block md:table-row border border-black "
+                    {...row.getRowProps()}>
                       {row.cells.map((cell) => {
                         return (
-                          <td {...cell.getCellProps({
-                            style:{minWidth: cell.column.minWidth,
+                          <td class="p-2 text-left block md:table-cell m-0.5"
+                          {...cell.getCellProps({
+                            style:{
+                            minWidth: cell.column.minWidth,                            
                             width:cell.column.width,
                             type: cell.column.type,
-                            fontSize: 17,
+                            fontSize: 16,
                           }
                           })}
                           >
+                             <span class="text-base text-left inline-block w-1/3 md:hidden font-bold ">{cell.render("Header")}</span> 
                             {cell.render("Cell")}
                           </td>
                         );
