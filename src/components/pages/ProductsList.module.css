@@ -131,3 +131,37 @@
 .btnLink:hover {
   color: #ffbb33;
 }
+
+@media (max-width: 450px) {
+
+.button{  
+  font-size: small;
+  width: 85px;
+}
+
+.buttonPesquisa{  
+  font-size: small;
+  width: 65px;
+  float: left;
+  height: 40px;  
+}
+
+.input{
+    display: flex;
+    height: 40px;
+    width: 160px;
+    font-size: small;    
+}
+
+
+.btnLink {
+  font-size: small;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 85px;
+  float: right;
+  height: 45px;
+}
+
+}

@@ -185,7 +185,7 @@ const ProductsList = (props) => {
         <div className={styles.project_details}>
           <div className={styles.details_container}>
             {message && <Message type={type} msg={message} /> }                        
-            <div >              
+            <div class="flex"> 
               <input className={styles.input}
                 type="text"
                 placeholder="Pesquisar pelo Nome"
@@ -212,16 +212,18 @@ const ProductsList = (props) => {
             >
               <thead class="block md:table-header-group">
                 {headerGroups.map((headerGroup) => (
-                  <tr class="border border-grey-500 md:border-solid block md:table-row absolute -top-full md:top-auto -left-full md:left-auto  md:relative "
+                  <tr class="border border-grey-500 md:border-solid block md:table-row absolute -top-full md:top-auto -left-full md:left-auto  md:relative border-0"
                   {...headerGroup.getHeaderGroupProps()}>
                     {headerGroup.headers.map((column) => (
                       <th  class="bg-black-600 p-2 text-#ffbb33 font-bold md:border-solid md:border-grey-500 text-left block md:table-cell"
-                      {...column.getHeaderProps({style:{
+                      {...column.getHeaderProps({
+                        style:{
                         minWidth: column.minWidth,
-                        maxWidth: column.maxWidth,                        
+                        maxWidth: column.maxWidth,
                         width:column.width,
                         fontSize:16
-                        }})}>
+                        }
+                        })}>
                        <span>{column.render("Header")}</span> 
                       </th>
                     ))}
@@ -233,17 +235,17 @@ const ProductsList = (props) => {
                 {rows.map((row, i) => {
                   prepareRow(row);
                   return (
-                    <tr class="bg-#efefef block md:table-row border border-black "
+                    <tr class="bg-#efefef block md:table-row border border-black"
                     {...row.getRowProps()}>
                       {row.cells.map((cell) => {
                         return (
                           <td class="p-2 text-left block md:table-cell m-0.5"
                           {...cell.getCellProps({
                             style:{
-                            minWidth: cell.column.minWidth,                            
+                            minWidth: cell.column.minWidth,
                             width:cell.column.width,
                             type: cell.column.type,
-                            fontSize: 16,
+                            fontSize: 16
                           }
                           })}
                           >
