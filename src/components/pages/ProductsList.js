@@ -6,6 +6,7 @@ import {BsPencil, BsFillTrashFill} from 'react-icons/bs'
 import styles from './ProductsList.module.css'
 import Message from '../layout/Message'
 import { numberFormat } from '../form/numberFormat';
+import Pagination from "@material-ui/lab/Pagination";
 
 const ProductsList = (props) => {
     const [produtos, setProdutos] = useState([]);
@@ -13,32 +14,46 @@ const ProductsList = (props) => {
     const [message, setMessage] = useState();
     const [type, setType] = useState();
     const produtosRef = useRef();
+
+    const [numeroPagina, setnumeroPagina] = useState(1);
+    const [totalPaginas, setTotalPaginas] = useState(0);
+    const [tamanhoPagina, settamanhoPagina] = useState(9);
+  
+    const tamannhosPagina = [3, 6, 9, 12];
   
     produtosRef.current = produtos;
-  
-    useEffect(() => {
-      recuperarProdutos();
-    }, []);
   
     const onChangeSearchName = (e) => {
       const searchName = e.target.value;
       setSearchName(searchName);
     };
   
-    const recuperarProdutos = () => {
-      ProductService.getAll()
-        .then((response) => {
-          setProdutos(response.data);
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    };
+    const getRequestParams = (filtroNome, numeroPagina, tamanhoPagina) => {
+      let params = {};
   
+      if (filtroNome) {
+        params["Nome"] = filtroNome;
+      }
+  
+      if (numeroPagina) {
+        params["NumeroPagina"] = numeroPagina - 1;
+      }
+  
+      if (tamanhoPagina) {
+        params["TamanhoPagina"] = tamanhoPagina;
+      }
+  
+      return params;
+    };
+
     const recuperarProdutosFiltro = () => {
-      ProductService.findByNome(searchName)
+      const params = getRequestParams(searchName, numeroPagina, tamanhoPagina);
+
+      ProductService.findByNome(params)
         .then((response) => {
-          setProdutos(response.data);
+          const { produtos, totalPaginas } = response.data;
+          setProdutos(produtos);
+          setTotalPaginas(totalPaginas);
         })
         .catch((e) => {
           console.log(e);
@@ -46,12 +61,13 @@ const ProductsList = (props) => {
     };
      
     const findByName = () => {
-      if (searchName !== ''){
-        recuperarProdutosFiltro();
-      } else {
-        recuperarProdutos();
-      }
-    };    
+      setnumeroPagina(1);
+      recuperarProdutosFiltro();
+    }; 
+    
+    useEffect(() => {
+      recuperarProdutosFiltro();
+    }, [numeroPagina, tamanhoPagina]);
 
     function deleteProduto(rowIndex){
       { window.confirm( 'Deseja deletar o produto?', ) && 
@@ -70,6 +86,15 @@ const ProductsList = (props) => {
       });      
 
     }
+    };
+
+    const handleNumeroPaginaChange = (event, value) => {
+      setnumeroPagina(value);
+    };
+  
+    const handleTamanhoPaginaChange = (event) => {
+      settamanhoPagina(event.target.value);
+      setnumeroPagina(1);
     };
     
     const columns = useMemo(
@@ -205,6 +230,29 @@ const ProductsList = (props) => {
               </div>
             </div>
           </div>
+          <div className="mt-0">
+          {"Itens por página: "}
+          <select onChange={handleTamanhoPaginaChange} value={tamanhoPagina}>
+            {tamannhosPagina.map((size) => (
+              <option key={size} value={size}>
+                {size}
+              </option>
+            ))}
+          </select>
+
+          <Pagination
+            className="my-2"
+            count={totalPaginas}
+            page={numeroPagina}
+            siblingCount={1}
+            boundaryCount={1}
+            variant="outlined"
+            shape="rounded"
+            onChange={handleNumeroPaginaChange}
+          />
+        </div>
+
+
           <div >
             <table class="table-auto min-w-full border-collapse block md:table  "
              

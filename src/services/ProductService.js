@@ -20,8 +20,8 @@ const remove = (id) => {
   return http.delete(`/produto/${id}`);
 };
 
-const findByNome = (nome) => {
-  return http.get(`/produto/Filtro?nome=${nome}`);   
+const findByNome = (param) => {
+  return http.get("/produto/Filtro", {params: param});   
 };
 
 const getAllUnidade = () => {
