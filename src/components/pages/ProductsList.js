@@ -230,7 +230,9 @@ const ProductsList = (props) => {
               </div>
             </div>
           </div>
-          <div className="mt-0">
+          <div class="flex items-stretch">        
+
+          <div class="py-2">
           {"Itens por página: "}
           <select onChange={handleTamanhoPaginaChange} value={tamanhoPagina}>
             {tamannhosPagina.map((size) => (
@@ -240,8 +242,11 @@ const ProductsList = (props) => {
             ))}
           </select>
 
+          </div>
+          
+          <div class="py-1">          
           <Pagination
-            className="my-2"
+            className="my-0"
             count={totalPaginas}
             page={numeroPagina}
             siblingCount={1}
@@ -249,7 +254,8 @@ const ProductsList = (props) => {
             variant="outlined"
             shape="rounded"
             onChange={handleNumeroPaginaChange}
-          />
+          /></div>
+
         </div>
 
 

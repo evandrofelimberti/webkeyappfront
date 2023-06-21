@@ -112,13 +112,16 @@ function Projects(){
             <div className={styles.title_container}>
             {message && <Message type="success" msg={message} />}
             {projectMessage && <Message type="success" msg={projectMessage} />}
-      
-                <input className={styles.input}
-                    type="text"
-                    placeholder="Pesquisar pelo Descrição"
-                    value={searchName}
-                    onChange={onChangeSearchName}
-                />
+            <div class="flex items-stretch">
+                <div >
+                  <input className={styles.input}
+                      type="text"
+                      placeholder="Pesquisar pelo Descrição"
+                      value={searchName}
+                      onChange={onChangeSearchName}
+                  />
+                </div>
+
                 <div >
                     <button className={styles.buttonPesquisa}
                         type="button"
@@ -126,11 +129,17 @@ function Projects(){
                     > Pesquisar
                     </button>
                 </div>
-               {/* <LinkButton className={styles.btnlink} to="/newproject" text="Criar movimento"/>*/}
-                <Link className={styles.btnLink} to="/newproject"> Criar movimento</Link>  
+                
+                <div>
+                  <Link className={styles.btnLink} to="/newproject"> Criar movimento</Link>  
+                </div>
+            </div>
+
+                
             </div> 
 
-            <div classname="mt-0">
+            <div class="flex items-stretch">
+             <div class="py-1">
                 {"Itens por página: "}
                 <select onChange={handleTamanhoPaginaChange} value={tamanhoPagina}>
                 {tamannhosPagina.map((size) => (
@@ -139,9 +148,10 @@ function Projects(){
                     </option>
                 ))}
                 </select>
-
+              </div> 
+              <div class="py-0">   
                 <Pagination
-                className="my-2"
+                className="my-0"
                 count={totalPaginas}
                 page={numeroPagina}
                 siblingCount={1}
@@ -150,6 +160,7 @@ function Projects(){
                 shape="rounded"
                 onChange={handleNumeroPaginaChange}
                 />
+              </div> 
             </div>
 
 
