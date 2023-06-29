@@ -1,22 +1,20 @@
 .project_card{
-    padding: 0.7em;
-    border: 1px solid #7a7a7a;
-    border-radius: 5px;
+    padding: 0.5em;
+    border: 0.5px solid #7a7a7a;
+    border-radius: 1.5px;
     width: 24%;
-    margin: 3px;
+    margin: 1.5px;
 }
 
 .project_card h4{
     background-color: #222;
     color: #ffbb33;
-    padding: .3em;
-    margin-bottom: .3em;
-    font-size: 1.2em;
+    padding: 0.2em;
 }
 
 .project_card p{
     color: #7a7a7a;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.1em;
 }
 
 .project_card p span{
@@ -54,9 +52,8 @@
 }
 
 .project_card_actions{
-    margin-top: 1.2em;
-    display: flex;
     align-items: center;
+    margin-bottom: 0.1px;
 }
 
 .project_card_actions a, 
@@ -67,13 +64,14 @@
     color: #222;
     font-size: .9em;
     padding: .6em 1em;
-    margin-right: 1em;
+    margin-right: 0.1em;
     cursor: pointer;
     border: 1px solid #222;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: 0.5s;
+    max-height: 30px;
 }
 
 .project_card_actions svg{
