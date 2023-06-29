@@ -1,11 +1,11 @@
 .form_control {
 display: flex;
 flex-direction: column;
-margin-bottom: 1em;
+margin-bottom: 0.5em;
 }
 
 .form_control label{
-    margin-bottom: .6em;
+    margin-bottom: .2em;
     font-weight: bold;
 }
 
