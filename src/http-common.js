@@ -1,4 +1,5 @@
 import axios from "axios";
+import UseToken from "./components/layout/UseToken";
 
 const customAxios = axios.create({
     baseURL: process.env.REACT_APP_URL_API_WEB_APP_KEY,
@@ -6,27 +7,30 @@ const customAxios = axios.create({
     headers:{'Content-Type': 'application/json',},  
 });
 
-const tokenString = localStorage.getItem('token');
-var token = '';
-
-if(tokenString != ''){
-    const userToken = JSON.parse(tokenString);
-    token = `Bearer ${userToken?.token}`;
-}
+const getToken = () => {   
+    const tokenString = localStorage.getItem('token');
+    if (tokenString != ''){
+        const userToken = JSON.parse(tokenString);
+        return `Bearer ${userToken?.token}`;        
+    } else {
+      return '';
+    }
+  };
 
 const requestHandler = request => {
-    request.headers.Authorization = token;
+    request.headers.Authorization = getToken();
     return request;
 };
 
 const responseHandler = response => {
-    if (response.status === 401) {
-        window.location = '/login';
-    }
     return response;
 };
 
 const errorHandler = error => {
+    if (error.response.status === 401) {      
+        localStorage.setItem('token','');    
+        window.location.href = '/';  
+    }
     return Promise.reject(error);
 };
 
