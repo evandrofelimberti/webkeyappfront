@@ -20,7 +20,7 @@ const ProdutoForm = ({novoProduto}) => {
     Unidade: null,
     TipoProdutoId: null,
     TipoProduto: null,
-    ValorVenda: null,
+    ValorVenda: 0.00,
     ProdutoSaldo: null,
   };
 
@@ -31,7 +31,7 @@ const ProdutoForm = ({novoProduto}) => {
   const [message, setMessage] = useState("");  
   const [pendenciaProduto, setPendenciaProduto] = useState(false);
   const [type, setType] = useState()  
-  const [valorVenda, setValorVenda] = useState('');  
+  const [valorVenda, setValorVenda] = useState('0.00');  
   
 
   const getProduto = Id => {
@@ -89,8 +89,8 @@ const ProdutoForm = ({novoProduto}) => {
 
   const handleInputChangeValorVenda = event => {
     const {value } = event.target;
-    setValorVenda(value);
-    setRecuperarProduto({ ...recuperarProduto, ValorVenda: value});
+    setValorVenda(value == '' ? '0.00': value);
+    setRecuperarProduto({ ...recuperarProduto, ValorVenda: value == '' ? '0.00': value});
     setMessage(""); 
     setPendenciaProduto(false);   
   };  
@@ -252,7 +252,7 @@ const validarProduto = () =>{
                 name="ValorVenda"
                 placeholder={"Insira o Preço para Venda"}
                 handleOnChange={handleInputChangeValorVenda}
-                value={valorVenda ? valorVenda: ''}
+                value={valorVenda == '' ? '0.00' : valorVenda}
               />
               <Select 
                   name="UnidadeId" 
